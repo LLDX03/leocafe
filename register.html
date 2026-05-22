@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo's Cafe — Create Account</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/register.css">
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-blob bg-blob-1" aria-hidden="true"></div>
+<div class="bg-blob bg-blob-2" aria-hidden="true"></div>
+<div class="bg-blob bg-blob-3" aria-hidden="true"></div>
+
+<!-- Leaves -->
+<svg class="leaf leaf-1" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+  <path d="M100 250 C60 200 10 150 30 80 C50 20 120 0 160 30 C200 60 190 130 160 170 C130 210 100 250 100 250Z" fill="#3D5C42"/>
+  <path d="M100 250 C100 200 105 150 110 80" stroke="#3D5C42" stroke-width="2" fill="none"/>
+</svg>
+<svg class="leaf leaf-2" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+  <path d="M100 250 C60 200 10 150 30 80 C50 20 120 0 160 30 C200 60 190 130 160 170 C130 210 100 250 100 250Z" fill="#5E7D55"/>
+  <path d="M100 250 C100 200 105 150 110 80" stroke="#5E7D55" stroke-width="2" fill="none"/>
+</svg>
+<svg class="leaf leaf-3" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+  <path d="M100 250 C60 200 10 150 30 80 C50 20 120 0 160 30 C200 60 190 130 160 170 C130 210 100 250 100 250Z" fill="#6B8F71"/>
+</svg>
+
+<main class="page">
+
+  <!-- LEFT -->
+  <section class="panel-left" aria-label="Create account">
+
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7 10h10l-1.5 7H8.5L7 10Z" stroke="#C8DBCB" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M17 12h2a2 2 0 0 1 0 4h-2" stroke="#C8DBCB" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M9 7 C9 5 11 3 13 5 C15 3 17 5 17 7" stroke="#A3C490" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M11 7 L11 10" stroke="#A3C490" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M14 7 L14 10" stroke="#A3C490" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Leo's Cafe</div>
+        <div class="brand-sub">Est. 2018 · Artisan Coffee</div>
+      </div>
+    </div>
+
+    <h1 class="welcome-heading">
+      Join us,<br><em>friend.</em>
+    </h1>
+    <p class="welcome-sub">Create your account to start earning rewards, save your favourite orders, and book your table.</p>
+
+    <div class="form-card">
+      <form id="registerForm" novalidate>
+
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="input-wrap">
+            <input type="text" id="username" placeholder="latte lover" autocomplete="username">
+            <svg class="input-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="8" cy="5" r="3"/>
+              <path d="M1 14c0-3.3 3.1-6 7-6s7 2.7 7 6"/>
+            </svg>
+          </div>
+          <div class="field-error" id="username-err">Username must be at least 4 characters.</div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <div class="input-wrap">
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+            <svg class="input-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="1" y="3" width="14" height="10" rx="2"/>
+              <path d="M1 6l7 4 7-4"/>
+            </svg>
+          </div>
+          <div class="field-error" id="email-err">Please enter a valid email address.</div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="password" placeholder="••••••••" autocomplete="new-password">
+            <svg class="input-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="7" width="12" height="8" rx="2"/>
+              <path d="M5 7V5a3 3 0 0 1 6 0v2"/>
+            </svg>
+            <button type="button" class="toggle-pw" id="togglePw1" aria-label="Toggle password visibility">
+              <svg id="eye1" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5Z"/>
+                <circle cx="8" cy="8" r="2"/>
+              </svg>
+            </button>
+          </div>
+          <!-- Strength bar -->
+          <div class="strength-wrap" id="strengthWrap">
+            <div class="strength-track">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <div class="strength-label" id="strengthLabel"></div>
+          </div>
+          <div class="field-error" id="pw-err">Password must be at least 6 characters.</div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirm">Confirm password</label>
+          <div class="input-wrap">
+            <input type="password" id="confirm" placeholder="••••••••" autocomplete="new-password">
+            <svg class="input-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="7" width="12" height="8" rx="2"/>
+              <path d="M5 7V5a3 3 0 0 1 6 0v2"/>
+            </svg>
+            <button type="button" class="toggle-pw" id="togglePw2" aria-label="Toggle confirm password visibility">
+              <svg id="eye2" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5Z"/>
+                <circle cx="8" cy="8" r="2"/>
+              </svg>
+            </button>
+          </div>
+          <div class="field-error" id="confirm-err">Passwords do not match.</div>
+        </div>
+
+        <button type="submit" class="btn-register" id="submitBtn">Create Account</button>
+
+        <div class="success-msg" id="successMsg">
+          ☕ Account created! Welcome to Leo's Cafe.
+        </div>
+
+        <div class="divider"><span>already a member?</span></div>
+
+        <div class="signin-row">
+          <a href="login.html">Sign in to your account</a>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- RIGHT -->
+  <div class="panel-right" aria-hidden="true">
+    <div class="right-shapes">
+      <div class="right-blob" style="width:360px;height:360px;top:-100px;right:-80px;"></div>
+      <div class="right-blob" style="width:240px;height:240px;bottom:-60px;left:-50px;"></div>
+      <div class="right-blob" style="width:140px;height:140px;top:45%;left:60%;"></div>
+    </div>
+    <div class="panel-right-inner">
+      <div class="right-eyebrow">Member benefits</div>
+      <div class="right-heading">More than just coffee.</div>
+      <p class="right-sub">Join Leo's Cafe and unlock a little something extra with every visit.</p>
+
+      <div class="perk-list">
+        <div class="perk-item">
+          <div class="perk-icon"><i class="ti ti-gift"></i></div>
+          <div>
+            <div class="perk-title">Free drink on your birthday</div>
+            <div class="perk-desc">We'll remember so you don't have to.</div>
+          </div>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon"><i class="ti ti-star"></i></div>
+          <div>
+            <div class="perk-title">Earn loyalty points</div>
+            <div class="perk-desc">Every order brings you closer to a reward.</div>
+          </div>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon"><i class="ti ti-calendar"></i></div>
+          <div>
+            <div class="perk-title">Reserve your favourite table</div>
+            <div class="perk-desc">Book ahead so your seat is always waiting.</div>
+          </div>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon"><i class="ti ti-clock"></i></div>
+          <div>
+            <div class="perk-title">Skip the queue</div>
+            <div class="perk-desc">Order ahead, pick up when you arrive.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-divider"></div>
+
+      <div class="right-footer">
+        <div class="right-footer-badge">2k+</div>
+        <div class="right-footer-text">
+          Join <strong>2,000+ members</strong> already enjoying their perks at Leo's Cafe.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="assets/js/register.js"></script>
+</body>
+</html>

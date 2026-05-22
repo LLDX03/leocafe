@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo's Cafe — Sign In</title>
+<link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+
+<!-- Background atmosphere -->
+<div class="bg-blob bg-blob-1" aria-hidden="true"></div>
+<div class="bg-blob bg-blob-2" aria-hidden="true"></div>
+<div class="bg-blob bg-blob-3" aria-hidden="true"></div>
+
+<!-- Decorative leaves -->
+<svg class="leaf leaf-1" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M100 250 C60 200 10 150 30 80 C50 20 120 0 160 30 C200 60 190 130 160 170 C130 210 100 250 100 250Z" fill="#3D5C42"/>
+  <path d="M100 250 C100 200 105 150 110 80" stroke="#3D5C42" stroke-width="2" fill="none"/>
+</svg>
+<svg class="leaf leaf-2" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M100 250 C60 200 10 150 30 80 C50 20 120 0 160 30 C200 60 190 130 160 170 C130 210 100 250 100 250Z" fill="#5E7D55"/>
+  <path d="M100 250 C100 200 105 150 110 80" stroke="#5E7D55" stroke-width="2" fill="none"/>
+</svg>
+<svg class="leaf leaf-3" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M100 250 C60 200 10 150 30 80 C50 20 120 0 160 30 C200 60 190 130 160 170 C130 210 100 250 100 250Z" fill="#6B8F71"/>
+</svg>
+
+<main class="page">
+
+  <!-- LEFT: Login form -->
+  <section class="panel-left" aria-label="Sign in">
+
+    <div class="brand">
+      <div class="brand-icon">
+        <!-- Coffee cup leaf icon -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 10h10l-1.5 7H8.5L7 10Z" stroke="#C8DBCB" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M17 12h2a2 2 0 0 1 0 4h-2" stroke="#C8DBCB" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M9 7 C9 5 11 3 13 5 C15 3 17 5 17 7" stroke="#A3C490" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M11 7 L11 10" stroke="#A3C490" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M14 7 L14 10" stroke="#A3C490" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Leo's Cafe</div>
+        <div class="brand-sub">Est. 2026 · No Actual Coffee</div>
+      </div>
+    </div>
+
+    <h1 class="welcome-heading">
+      Welcome<br><em>back.</em>
+    </h1>
+    <p class="welcome-sub">Sign in to see.. OK?</p>
+
+    <div class="form-card">
+      <form id="loginForm" novalidate>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <div class="input-wrap">
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+            <svg class="input-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="1" y="3" width="14" height="10" rx="2"/>
+              <path d="M1 6l7 4 7-4"/>
+            </svg>
+          </div>
+          <div class="field-error" id="email-err">Please enter a valid email address.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+            <svg class="input-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="7" width="12" height="8" rx="2"/>
+              <path d="M5 7V5a3 3 0 0 1 6 0v2"/>
+            </svg>
+            <button type="button" class="toggle-pw" id="togglePw" aria-label="Toggle password visibility">
+              <svg id="eye-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5Z"/>
+                <circle cx="8" cy="8" r="2"/>
+              </svg>
+            </button>
+          </div>
+          <div class="field-error" id="pw-err">Password must be at least 6 characters.</div>
+        </div>
+
+        <div class="form-row">
+          <label class="remember">
+            <input type="checkbox" id="remember">
+            <span class="check-box">
+              <svg viewBox="0 0 10 10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 5l2.5 2.5L8 3"/>
+              </svg>
+            </span>
+            Keep me signed in
+          </label>
+          <a href="#" class="forgot">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-signin">Sign In</button>
+
+        <div class="success-msg" id="successMsg">
+          ☕ Welcome back! Redirecting you now…
+        </div>
+
+        <div class="divider"><span>or</span></div>
+
+        <div class="signup-row">
+          New to Leo's Cafe? <a href="register.html">Create an account</a>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- RIGHT: Visual panel -->
+  <div class="panel-right" aria-hidden="true">
+    <div class="right-shapes">
+      <svg width="100%" height="100%" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Large organic blobs -->
+        <ellipse cx="500" cy="150" rx="280" ry="220" fill="#C8DBCB" transform="rotate(-20 500 150)"/>
+        <ellipse cx="100" cy="600" rx="200" ry="300" fill="#A3C490" transform="rotate(10 100 600)"/>
+        <ellipse cx="350" cy="450" rx="180" ry="140" fill="#8BAF7C" transform="rotate(35 350 450)"/>
+        <!-- Small accent circles -->
+        <circle cx="480" cy="700" r="80" fill="#6B8F71"/>
+        <circle cx="80" cy="100" r="50" fill="#C8DBCB"/>
+        <!-- Leaf shapes -->
+        <path d="M300 50 C260 120 180 200 220 320 C260 440 370 440 420 330 C470 220 440 130 380 80 C340 40 300 50 300 50Z" fill="#A3C490"/>
+        <path d="M50 400 C70 350 120 310 160 350 C200 390 180 450 140 470 C100 490 40 460 50 400Z" fill="#8BAF7C"/>
+        <path d="M520 500 C540 440 600 420 610 480 C620 540 580 580 540 560 C510 545 510 520 520 500Z" fill="#C8DBCB"/>
+        <!-- Fine leaf veins -->
+        <path d="M300 50 C320 180 340 300 350 440" stroke="#fff" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+
+    <div class="right-overlay"></div>
+
+    <div class="panel-right-inner">
+      <div class="right-quote">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">Men drink espresso. Boys drink matcha</p>
+        <div class="quote-author">— Leo's Cafe, my philosophy</div>
+      </div>
+      <div class="right-badges">
+        <div class="badge-pill">Just for fun</div>
+        <div class="badge-pill">Est. 2026</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="assets/js/login.js"></script>
+</body>
+</html>
