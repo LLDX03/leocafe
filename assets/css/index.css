@@ -263,3 +263,102 @@
     color: var(--gold);
     font-size: 14px;
 }
+
+
+.member-strip {
+    background: #3D5C42;
+    padding: 9px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.strip-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.strip-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(200, 219, 203, 0.25);
+    border: 1px solid rgba(200, 219, 203, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #C8DBCB;
+    flex-shrink: 0;
+}
+
+.strip-name {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #d8edd9;
+}
+
+.strip-pts {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    color: #9ab89e;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 1px;
+}
+
+.strip-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.strip-pill {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 100px;
+    padding: 4px 11px;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #C8DBCB;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.strip-pill:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.strip-pill i {
+    font-size: 12px;
+}
+
+.strip-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(200, 219, 203, 0.2);
+}
+
+@media (max-width: 600px) {
+    .member-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 20px;
+    }
+
+    .strip-right {
+        flex-wrap: wrap;
+    }
+}

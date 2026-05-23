@@ -1,303 +1,311 @@
-<link rel="stylesheet" href="assets/css/index.css">
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="menu-wrap">
-  <div class="header">
-    <div class="header-ornament">
-      <div class="ornament-line"></div>
-      <div class="ornament-diamond"></div>
-      <div class="ornament-line right"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo's Cafe — Menu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/index.css">
+
+</head>
+
+<body>
+
+  <div class="menu-wrap">
+    <div class="header">
+      <div class="header-ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line right"></div>
+      </div>
+      <div class="cafe-name">Leo's Cafe</div>
+      <div class="cafe-tagline">Artisan · Refined · Timeless</div>
     </div>
-    <div class="cafe-name">Leo's Cafe</div>
-    <div class="cafe-tagline">Artisan · Refined · Timeless</div>
+
+    <!-- Member welcome strip (shown only when logged in) -->
+    <div class="member-strip" id="memberStrip" style="display:none;">
+      <div class="strip-left">
+        <div class="strip-avatar" id="stripAvatar">L</div>
+        <div>
+          <div class="strip-name" id="stripName">Welcome back, Leo</div>
+          <div class="strip-pts">
+            <i class="ti ti-star" style="font-size:11px;"></i>
+            <span id="stripPts">240 pts</span>
+
+            <i class="ti ti-cake" style="font-size:11px;"></i>
+            <span>13/02</span>
+          </div>
+        </div>
+      </div>
+      <div class="strip-right">
+        <a class="strip-pill" href="points.html">
+          <i class="ti ti-award"></i> Rewards
+        </a>
+        <div class="strip-divider"></div>
+        <a class="strip-pill" href="reserve.html">
+          <i class="ti ti-calendar"></i> Reserve
+        </a>
+        <div class="strip-divider"></div>
+        <a class="strip-pill" href="order.html">
+          <i class="ti ti-shopping-bag"></i> Order Ahead
+        </a>
+      </div>
+    </div>
+
+    <nav class="tab-nav" role="tablist">
+      <button class="tab-btn active" data-tab="espresso" role="tab">Espresso</button>
+      <button class="tab-btn" data-tab="brewed" role="tab">Brewed Coffee</button>
+      <button class="tab-btn" data-tab="tea" role="tab">Tea & Botanicals</button>
+      <button class="tab-btn" data-tab="cold" role="tab">Cold & Signature</button>
+    </nav>
+
+    <!-- Espresso -->
+    <section class="menu-section visible" id="tab-espresso">
+      <div class="section-header">
+        <div class="section-title">Espresso Selections</div>
+        <div class="section-subtitle">Single origin · ethically sourced</div>
+      </div>
+      <div class="category-label">Classics</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Espresso</div>
+          <div class="item-desc">Short pull, double ristretto. Bright and structured.</div>
+        </div>
+        <div class="item-price">$5.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Macchiato</div>
+          <div class="item-desc">A gentle crown of silken microfoam over a double shot.</div>
+        </div>
+        <div class="item-price">$6.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Cortado</div>
+          <div class="item-desc">Equal parts espresso and warm milk, served in a Gibraltar glass.</div>
+        </div>
+        <div class="item-price">$6.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Cappuccino</div>
+          <div class="item-desc">Velvety foam, precisely layered. Available dry or wet.</div>
+        </div>
+        <div class="item-price">$7.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Flat White</div>
+          <div class="item-desc">Ristretto double, silky steamed whole milk. Intense and smooth.</div>
+        </div>
+        <div class="item-price">$7.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Café au Lait</div>
+          <div class="item-desc">House drip blended with steamed milk, old-world style.</div>
+        </div>
+        <div class="item-price">$6.50</div>
+      </div>
+      <div class="category-label">Elevated</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Affogato <span class="item-badge">Seasonal</span></div>
+          <div class="item-desc">House-made vanilla bean gelato, drowned in a hot double shot.</div>
+        </div>
+        <div class="item-price">$9.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Brûlée Latte</div>
+          <div class="item-desc">Torched caramel custard syrup, espresso, warm oat milk.</div>
+        </div>
+        <div class="item-price">$8.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Black Sesame Latte <span class="item-badge">Signature</span></div>
+          <div class="item-desc">House black sesame paste, espresso, steamed milk. Nutty and delicate.</div>
+        </div>
+        <div class="item-price">$9.00</div>
+      </div>
+      <div class="footer-note">
+        <p>All espresso drinks available with oat, almond, or soy milk · +$1.00<br>Our beans are freshly roasted weekly
+          by a local artisan roastery</p>
+        <div class="footer-ornament"><span></span><i class="ti ti-leaf" aria-hidden="true"></i><span></span></div>
+      </div>
+    </section>
+
+    <!-- Brewed Coffee -->
+    <section class="menu-section" id="tab-brewed">
+      <div class="section-header">
+        <div class="section-title">Brewed Coffee</div>
+        <div class="section-subtitle">Pour over · French press · Siphon</div>
+      </div>
+      <div class="category-label">Pour Over</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">V60 Single Origin</div>
+          <div class="item-desc">Rotating seasonal single origin, brewed to order. Ask your barista today's offering.
+          </div>
+        </div>
+        <div class="item-price">$8.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Chemex House Blend</div>
+          <div class="item-desc">Our signature blend, clean and balanced. Serves two.</div>
+        </div>
+        <div class="item-price">$12.00</div>
+      </div>
+      <div class="category-label">Immersion</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">French Press</div>
+          <div class="item-desc">Full-bodied, 4-minute steep. Dark roast, bold and rich.</div>
+        </div>
+        <div class="item-price">$7.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Siphon Brew <span class="item-badge">Reserve</span></div>
+          <div class="item-desc">Theatrical tableside preparation. Extraordinarily clean cup. Limited daily.</div>
+        </div>
+        <div class="item-price">$16.00</div>
+      </div>
+      <div class="footer-note">
+        <p>Brewing times vary · please allow 5–10 minutes<br>Refills available on Chemex and French Press · +$4.00</p>
+        <div class="footer-ornament"><span></span><i class="ti ti-coffee" aria-hidden="true"></i><span></span></div>
+      </div>
+    </section>
+
+    <!-- Tea & Botanicals -->
+    <section class="menu-section" id="tab-tea">
+      <div class="section-header">
+        <div class="section-title">Tea & Botanicals</div>
+        <div class="section-subtitle">Loose leaf · hand-blended · ceremonial</div>
+      </div>
+      <div class="category-label">Loose Leaf Tea</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Darjeeling First Flush</div>
+          <div class="item-desc">Muscatel notes, golden liquor. Light and floral.</div>
+        </div>
+        <div class="item-price">$7.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Gyokuro Shaded Green</div>
+          <div class="item-desc">Japanese shade-grown. Umami-rich, smooth sweetness.</div>
+        </div>
+        <div class="item-price">$8.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Earl Grey Supreme</div>
+          <div class="item-desc">Silver tips bergamot, layered with blue cornflower.</div>
+        </div>
+        <div class="item-price">$7.00</div>
+      </div>
+      <div class="category-label">Ceremonial Matcha</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Ceremonial Matcha</div>
+          <div class="item-desc">Stone-ground, traditionally whisked. Served with a small sweet.</div>
+        </div>
+        <div class="item-price">$9.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Matcha Latte</div>
+          <div class="item-desc">Ceremonial grade, steamed oat or whole milk.</div>
+        </div>
+        <div class="item-price">$8.50</div>
+      </div>
+      <div class="category-label">Botanicals</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Rose & Hibiscus Tisane</div>
+          <div class="item-desc">Dried petals, naturally caffeine-free. Tart and floral.</div>
+        </div>
+        <div class="item-price">$7.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Golden Milk <span class="item-badge">Signature</span></div>
+          <div class="item-desc">Turmeric, cardamom, coconut milk, a whisper of black pepper.</div>
+        </div>
+        <div class="item-price">$8.00</div>
+      </div>
+      <div class="footer-note">
+        <p>All teas brewed at optimal temperature per varietal<br>Loose leaf refill on request · +$3.50</p>
+        <div class="footer-ornament"><span></span><i class="ti ti-flower" aria-hidden="true"></i><span></span></div>
+      </div>
+    </section>
+
+    <!-- Cold & Signature -->
+    <section class="menu-section" id="tab-cold">
+      <div class="section-header">
+        <div class="section-title">Cold & Signature</div>
+        <div class="section-subtitle">Crafted slowly · served beautifully</div>
+      </div>
+      <div class="category-label">Cold Coffee</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Cold Brew</div>
+          <div class="item-desc">18-hour steep, served over a single large ice sphere.</div>
+        </div>
+        <div class="item-price">$8.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Kyoto Slow Drip <span class="item-badge">Reserve</span></div>
+          <div class="item-desc">Tower-brewed 8 hours, crisp, wine-like complexity. Limited.</div>
+        </div>
+        <div class="item-price">$14.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Espresso Tonic</div>
+          <div class="item-desc">Chilled tonic water, lemon zest, double ristretto floated on top.</div>
+        </div>
+        <div class="item-price">$9.00</div>
+      </div>
+      <div class="category-label">Signature Creations</div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Café de Fleur <span class="item-badge">Signature</span></div>
+          <div class="item-desc">Rose water cold brew, elderflower, chilled oat milk, edible petals.</div>
+        </div>
+        <div class="item-price">$12.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Yuzu Citrus Latte</div>
+          <div class="item-desc">House yuzu syrup, espresso, sparkling milk foam.</div>
+        </div>
+        <div class="item-price">$10.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Dorée Fizz <span class="item-badge">Signature</span></div>
+          <div class="item-desc">Honey cold brew, sparkling water, candied ginger, gold leaf garnish.</div>
+        </div>
+        <div class="item-price">$13.00</div>
+      </div>
+      <div class="footer-note">
+        <p>Seasonal offerings rotate monthly · ask your barista<br>Alcohol-free pairings available on request</p>
+        <div class="footer-ornament"><span></span><i class="ti ti-star" aria-hidden="true"></i><span></span></div>
+      </div>
+    </section>
   </div>
 
-  <nav class="tab-nav" role="tablist">
-    <button class="tab-btn active" data-tab="espresso" role="tab">Espresso</button>
-    <button class="tab-btn" data-tab="brewed" role="tab">Brewed Coffee</button>
-    <button class="tab-btn" data-tab="tea" role="tab">Tea & Botanicals</button>
-    <button class="tab-btn" data-tab="cold" role="tab">Cold & Signature</button>
-  </nav>
+  <script src="assets/js/index.js"></script>
+</body>
 
-  <!-- Espresso -->
-  <section class="menu-section visible" id="tab-espresso">
-    <div class="section-header">
-      <div class="section-title">Espresso Selections</div>
-      <div class="section-subtitle">Single origin · ethically sourced</div>
-    </div>
-
-    <div class="category-label">Classics</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Espresso</div>
-        <div class="item-desc">Short pull, double ristretto. Bright and structured.</div>
-      </div>
-      <div class="item-price">$5.50</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Macchiato</div>
-        <div class="item-desc">A gentle crown of silken microfoam over a double shot.</div>
-      </div>
-      <div class="item-price">$6.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Cortado</div>
-        <div class="item-desc">Equal parts espresso and warm milk, served in a Gibraltar glass.</div>
-      </div>
-      <div class="item-price">$6.50</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Cappuccino</div>
-        <div class="item-desc">Velvety foam, precisely layered. Available dry or wet.</div>
-      </div>
-      <div class="item-price">$7.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Flat White</div>
-        <div class="item-desc">Ristretto double, silky steamed whole milk. Intense and smooth.</div>
-      </div>
-      <div class="item-price">$7.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Café au Lait</div>
-        <div class="item-desc">House drip blended with steamed milk, old-world style.</div>
-      </div>
-      <div class="item-price">$6.50</div>
-    </div>
-
-    <div class="category-label">Elevated</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Affogato <span class="item-badge">Seasonal</span></div>
-        <div class="item-desc">House-made vanilla bean gelato, drowned in a hot double shot.</div>
-      </div>
-      <div class="item-price">$9.50</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Brûlée Latte</div>
-        <div class="item-desc">Torched caramel custard syrup, espresso, warm oat milk.</div>
-      </div>
-      <div class="item-price">$8.50</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Black Sesame Latte <span class="item-badge">Signature</span></div>
-        <div class="item-desc">House black sesame paste, espresso, steamed milk. Nutty and delicate.</div>
-      </div>
-      <div class="item-price">$9.00</div>
-    </div>
-
-    <div class="footer-note">
-      <p>All espresso drinks available with oat, almond, or soy milk · +$1.00<br>
-      Our beans are freshly roasted weekly by a local artisan roastery</p>
-      <div class="footer-ornament">
-        <span></span>
-        <i class="ti ti-leaf" aria-hidden="true"></i>
-        <span></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Brewed Coffee -->
-  <section class="menu-section" id="tab-brewed">
-    <div class="section-header">
-      <div class="section-title">Brewed Coffee</div>
-      <div class="section-subtitle">Pour over · French press · Siphon</div>
-    </div>
-
-    <div class="category-label">Pour Over</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">V60 Single Origin</div>
-        <div class="item-desc">Rotating seasonal single origin, brewed to order. Ask your barista today's offering.</div>
-      </div>
-      <div class="item-price">$8.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Chemex House Blend</div>
-        <div class="item-desc">Our signature blend, clean and balanced. Serves two.</div>
-      </div>
-      <div class="item-price">$12.00</div>
-    </div>
-
-    <div class="category-label">Immersion</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">French Press</div>
-        <div class="item-desc">Full-bodied, 4-minute steep. Dark roast, bold and rich.</div>
-      </div>
-      <div class="item-price">$7.50</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Siphon Brew <span class="item-badge">Reserve</span></div>
-        <div class="item-desc">Theatrical tableside preparation. Extraordinarily clean cup. Limited daily.</div>
-      </div>
-      <div class="item-price">$16.00</div>
-    </div>
-
-    <div class="footer-note">
-      <p>Brewing times vary · please allow 5–10 minutes<br>
-      Refills available on Chemex and French Press · +$4.00</p>
-      <div class="footer-ornament">
-        <span></span>
-        <i class="ti ti-coffee" aria-hidden="true"></i>
-        <span></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tea & Botanicals -->
-  <section class="menu-section" id="tab-tea">
-    <div class="section-header">
-      <div class="section-title">Tea & Botanicals</div>
-      <div class="section-subtitle">Loose leaf · hand-blended · ceremonial</div>
-    </div>
-
-    <div class="category-label">Loose Leaf Tea</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Darjeeling First Flush</div>
-        <div class="item-desc">Muscatel notes, golden liquor. Light and floral.</div>
-      </div>
-      <div class="item-price">$7.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Gyokuro Shaded Green</div>
-        <div class="item-desc">Japanese shade-grown. Umami-rich, smooth sweetness.</div>
-      </div>
-      <div class="item-price">$8.50</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Earl Grey Supreme</div>
-        <div class="item-desc">Silver tips bergamot, layered with blue cornflower.</div>
-      </div>
-      <div class="item-price">$7.00</div>
-    </div>
-
-    <div class="category-label">Ceremonial Matcha</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Ceremonial Matcha</div>
-        <div class="item-desc">Stone-ground, traditionally whisked. Served with a small sweet.</div>
-      </div>
-      <div class="item-price">$9.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Matcha Latte</div>
-        <div class="item-desc">Ceremonial grade, steamed oat or whole milk.</div>
-      </div>
-      <div class="item-price">$8.50</div>
-    </div>
-
-    <div class="category-label">Botanicals</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Rose & Hibiscus Tisane</div>
-        <div class="item-desc">Dried petals, naturally caffeine-free. Tart and floral.</div>
-      </div>
-      <div class="item-price">$7.50</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Golden Milk <span class="item-badge">Signature</span></div>
-        <div class="item-desc">Turmeric, cardamom, coconut milk, a whisper of black pepper.</div>
-      </div>
-      <div class="item-price">$8.00</div>
-    </div>
-
-    <div class="footer-note">
-      <p>All teas brewed at optimal temperature per varietal<br>
-      Loose leaf refill on request · +$3.50</p>
-      <div class="footer-ornament">
-        <span></span>
-        <i class="ti ti-flower" aria-hidden="true"></i>
-        <span></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cold & Signature -->
-  <section class="menu-section" id="tab-cold">
-    <div class="section-header">
-      <div class="section-title">Cold & Signature</div>
-      <div class="section-subtitle">Crafted slowly · served beautifully</div>
-    </div>
-
-    <div class="category-label">Cold Coffee</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Cold Brew</div>
-        <div class="item-desc">18-hour steep, served over a single large ice sphere.</div>
-      </div>
-      <div class="item-price">$8.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Kyoto Slow Drip <span class="item-badge">Reserve</span></div>
-        <div class="item-desc">Tower-brewed 8 hours, crisp, wine-like complexity. Limited.</div>
-      </div>
-      <div class="item-price">$14.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Espresso Tonic</div>
-        <div class="item-desc">Chilled tonic water, lemon zest, double ristretto floated on top.</div>
-      </div>
-      <div class="item-price">$9.00</div>
-    </div>
-
-    <div class="category-label">Signature Creations</div>
-
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Café de Fleur <span class="item-badge">Signature</span></div>
-        <div class="item-desc">Rose water cold brew, elderflower, chilled oat milk, edible petals.</div>
-      </div>
-      <div class="item-price">$12.00</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Yuzu Citrus Latte</div>
-        <div class="item-desc">House yuzu syrup, espresso, sparkling milk foam.</div>
-      </div>
-      <div class="item-price">$10.50</div>
-    </div>
-    <div class="menu-item">
-      <div class="item-left">
-        <div class="item-name">Dorée Fizz <span class="item-badge">Signature</span></div>
-        <div class="item-desc">Honey cold brew, sparkling water, candied ginger, gold leaf garnish.</div>
-      </div>
-      <div class="item-price">$13.00</div>
-    </div>
-
-    <div class="footer-note">
-      <p>Seasonal offerings rotate monthly · ask your barista<br>
-      Alcohol-free pairings available on request</p>
-      <div class="footer-ornament">
-        <span></span>
-        <i class="ti ti-star" aria-hidden="true"></i>
-        <span></span>
-      </div>
-    </div>
-  </section>
-</div>
-
-<script src="assets/js/index.js"></script>
+</html>

@@ -26,10 +26,11 @@ pwInput.addEventListener('input', () => {
 
     let score = 0;
     if (val.length >= 8) score++;
+    if (/[a-z]/.test(val)) score++;
     if (/[A-Z]/.test(val)) score++;
     if (/[0-9]/.test(val)) score++;
     if (/[^A-Za-z0-9]/.test(val)) score++;
-    
+
 
     const levels = [
         { label: 'Very weak', color: '#c0735e', width: '20%' },
@@ -39,7 +40,8 @@ pwInput.addEventListener('input', () => {
         { label: 'Very strong', color: '#3D5C42', width: '100%' },
     ];
 
-    const lvl = levels[Math.min(score, 4)];
+    const lvlIndex = score === 0 ? 0 : Math.min(score - 1, 4);
+    const lvl = levels[lvlIndex];
     strengthFill.style.width = lvl.width;
     strengthFill.style.background = lvl.color;
     strengthLabel.textContent = lvl.label;
@@ -74,7 +76,7 @@ function validate() {
     const p = fields.password.el.value;
     const c = fields.confirm.el.value;
 
-    if (u.length < 4) { showError('username', 'Username must be at least 4 characters.'); ok = false; }
+    if (u.length < 3) { showError('username', 'Username must be at least 3 characters.'); ok = false; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) { showError('email', 'Please enter a valid email address.'); ok = false; }
     if (p.length < 8) { showError('password', 'Password must be at least 8 characters.'); ok = false; }
     if (!/[a-z]/.test(p)) { showError('password', 'Password must be at contain a lower case.'); ok = false; };
@@ -86,14 +88,45 @@ function validate() {
     return ok;
 }
 
-document.getElementById('registerForm').addEventListener('submit', (e) => {
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (validate()) {
-        // Store username for use on index.html
-        localStorage.setItem('leos_username', fields.username.el.value.trim());
 
-        const btn = document.getElementById('submitBtn');
-        btn.disabled = true;
-        document.getElementById('successMsg').style.display = 'block';
+    if (!validate()) return;
+
+    const data = {
+        username: fields.username.el.value.trim(),
+        email: fields.email.el.value.trim(),
+        password: fields.password.el.value
+    };
+
+    try {
+        const res = await fetch("http://localhost:3000/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+
+        if (result.success) {
+            localStorage.setItem('leos_username', data.username);
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            document.getElementById('successMsg').style.display = 'block';
+        
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1500);
+
+        } else {
+            showError('email', result.message || "Registration failed");
+        }
+
+    } catch (err) {
+        console.log(err);
+        alert("Server not running");
     }
 });
