@@ -100,7 +100,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     };
 
     try {
-        const res = await fetch("http://localhost:3000/register", {
+        const res = await fetch("http://localhost:3000/auth/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -115,15 +115,15 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
             document.getElementById('successMsg').style.display = 'block';
-        
+
             setTimeout(() => {
-                window.location.href = "login.html";
+                window.location.href = "/views/login.html";
             }, 1500);
 
         } else {
             showError('email', result.message || "Registration failed");
         }
-    
+
 
     } catch (err) {
         console.log(err);

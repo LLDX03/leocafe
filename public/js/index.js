@@ -5,12 +5,12 @@ const expiry = localStorage.getItem("token_expiry");
 if (!token || !expiry || Date.now() > expiry) {
   localStorage.removeItem("token");
   localStorage.removeItem("token_expiry");
-  window.location.replace("login.html");
+  window.location.replace("/views/login.html");
 }
 if (Date.now() > expiry) {
   localStorage.removeItem("token");
   localStorage.removeItem("token_expiry");
-  window.location.href = "login.html";
+  window.location.href = "/views/login.html";
 }
 
 tabs.forEach(btn => {
@@ -28,13 +28,13 @@ tabs.forEach(btn => {
 
 /* ---------------- AUTH CHECK ---------------- */
 
-fetch("http://localhost:3000/me", {
+fetch("http://localhost:3000/auth/me", {
   headers: { Authorization: `Bearer ${token}` }
 })
   .then(res => res.json())
   .then(data => {
     if (!data.success) {
-      window.location.href = "login.html";
+      window.location.href = "/views/login.html";
       return;
     }
     const user = data.user;

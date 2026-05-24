@@ -63,7 +63,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value;
 
     try {
-        const res = await fetch("http://localhost:3000/login", {
+        const res = await fetch("http://localhost:3000/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
@@ -84,9 +84,9 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             localStorage.setItem("token", data.token);
             localStorage.setItem("token_expiry", expiry);
 
-            window.location.href = "index.html";
+            window.location.href = "/views/index.html";
         }
-        
+
         else {
             alert(data.message || "Invalid login");
         }

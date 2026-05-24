@@ -6,14 +6,14 @@ const expiry = localStorage.getItem("token_expiry");
 if (!token || !expiry || Date.now() > expiry) {
   localStorage.removeItem("token");
   localStorage.removeItem("token_expiry");
-  window.location.replace("login.html");
+  window.location.replace("/views/login.html");
 }
 
 // Global points variable
 let pts = 0;
 
 // Fetch user data from backend
-fetch("http://localhost:3000/me", {
+fetch("http://localhost:3000/auth/me", {
   headers: {
     Authorization: `Bearer ${token}`
   }
@@ -21,7 +21,7 @@ fetch("http://localhost:3000/me", {
   .then(res => res.json())
   .then(data => {
     if (!data.success) {
-      window.location.href = "login.html";
+      window.location.href = "/views/login.html";
       return;
     }
 
@@ -161,7 +161,7 @@ function redeem(btn, cost, name) {
 function deductPointsFromBackend(cost, rewardName, redemptionId) {
   const token = localStorage.getItem("token");
   
-  fetch("http://localhost:3000/redeem", {
+  fetch("http://localhost:3000/rewards", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
