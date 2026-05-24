@@ -111,7 +111,6 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
         const result = await res.json();
 
         if (result.success) {
-            localStorage.setItem('leos_username', data.username);
 
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
