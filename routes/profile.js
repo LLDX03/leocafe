@@ -49,7 +49,7 @@ async function sendEmail(to, subject, text) {
 router.get("/", authenticateToken, async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT id, username, email, points, tier, birthday, bookings, created_at FROM users WHERE id = $1",
+      "SELECT id, username, email, points, tier, birthday, bookings, created_at AS \"createdAt\" FROM users WHERE id = $1",
       [req.userId]
     );
 

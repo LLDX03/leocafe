@@ -7,11 +7,7 @@ if (!token || !expiry || Date.now() > expiry) {
   localStorage.removeItem("token_expiry");
   window.location.replace("/views/login.html");
 }
-if (Date.now() > expiry) {
-  localStorage.removeItem("token");
-  localStorage.removeItem("token_expiry");
-  window.location.href = "/views/login.html";
-}
+
 
 tabs.forEach(btn => {
   btn.addEventListener('click', () => {

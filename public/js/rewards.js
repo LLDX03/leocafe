@@ -59,6 +59,7 @@ fetch("http://localhost:3000/auth/me", {
     updateRewardCardStates();
 
     console.log("User data:", user);
+    loadHistory(); 
   })
   .catch(err => {
     console.error("Error loading user:", err);
@@ -156,6 +157,7 @@ function redeem(btn, cost, name) {
 
   list.prepend(item);
   showToast('☕ ' + name + ' redeemed!');
+  loadHistory();
 }
 
 function deductPointsFromBackend(cost, rewardName, redemptionId) {
@@ -211,9 +213,7 @@ function showRedemptionModal(rewardName, cost, redemptionId) {
         <div class="ref-label">Redemption ID</div>
         <div class="ref-value">${redemptionId}</div>
       </div>
-
-      <div class="validity-text">Valid for 24 hours</div>
-
+      <div class="validity-text">Valid for 24 hours · Please screenshot before closing</div>
       <button class="btn-close" onclick="closeRedemptionModal()">Close</button>
     </div>
   `;
@@ -229,6 +229,7 @@ function closeRedemptionModal() {
   if (modal) {
     modal.remove();
   }
+  window.location.reload();
 }
 
 function generateQRCode(text, containerId) {
@@ -263,3 +264,41 @@ function showToast(msg) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3000);
 }
+
+
+function loadHistory() {
+    fetch("http://localhost:3000/rewards", {
+        headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (!data.success) return;
+
+        const list = document.getElementById('historyList');
+        list.innerHTML = '';
+
+        if (data.redemptions.length === 0) {
+            list.innerHTML = '<p style="color:var(--warm-gray);text-align:center;padding:24px;">No redemptions yet.</p>';
+            return;
+        }
+
+        data.redemptions.forEach(r => {
+            const date = new Date(r.created_at).toLocaleDateString('en-GB', {
+                day: 'numeric', month: 'short', year: 'numeric'
+            });
+            const item = document.createElement('div');
+            item.className = 'history-item';
+            item.innerHTML = `
+                <div class="history-icon redeem"><i class="ti ti-award"></i></div>
+                <div class="history-info">
+                    <div class="history-name">Redeemed — ${r.reward_name}</div>
+                    <div class="history-date">${date}</div>
+                </div>
+                <div class="history-pts redeem">−${r.points_deducted} pts</div>
+            `;
+            list.appendChild(item);
+        });
+    })
+    .catch(err => console.error("Error loading history:", err));
+}
+

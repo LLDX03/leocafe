@@ -1,12 +1,12 @@
 # ☕ Leo's Cafe
 
-A full-stack café management web application built to refresh and strengthen my software development skills after National Service.
+A full-stack café management web application built to refresh and strengthen my software development skills after NS.
 
 The system simulates a real café platform where users can browse menus, place orders ahead of time, earn and redeem loyalty rewards, make table reservations, and manage their accounts securely.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech
 
 ### Frontend
 - HTML, CSS, JavaScript

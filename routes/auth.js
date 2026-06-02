@@ -16,7 +16,10 @@ router.post("/register", async (req, res) => {
         res.json({ success: true });
     } catch (err) {
         console.log(err);
-        res.json({ success: false });
+        if (err.code === "23505") {
+            return res.json({ success: false, message: "Email already in use" });
+        }
+        res.json({ success: false, message: "Server error" });
     }
 });
 
@@ -61,6 +64,24 @@ router.get("/me", authMiddleware, async (req, res) => {
     } catch (err) {
         console.log(err);
         res.json({ success: false });
+    }
+});
+
+
+router.post("/add-points", authMiddleware, async (req, res) => {
+    try {
+        const { points } = req.body;
+        if (!points || points <= 0) {
+            return res.json({ success: false, message: "Invalid points" });
+        }
+        await pool.query(
+            "UPDATE users SET points = points + $1 WHERE id = $2",
+            [points, req.user.id]
+        );
+        res.json({ success: true });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: "Server error" });
     }
 });
 

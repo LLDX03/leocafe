@@ -39,4 +39,40 @@ router.post("/", authMiddleware, async (req, res) => {
     }
 });
 
+
+router.get("/", authMiddleware, async (req, res) => {
+    try {
+        const result = await pool.query(
+            `SELECT reward_name, points_deducted, created_at 
+             FROM redemptions 
+             WHERE user_id = $1 
+             ORDER BY created_at DESC 
+             LIMIT 5`,
+            [req.user.id]
+        );
+        res.json({ success: true, redemptions: result.rows });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: "Server error" });
+    }
+});
+
+
+router.get("/active", authMiddleware, async (req, res) => {
+    try {
+        const result = await pool.query(
+            `SELECT reward_name, points_deducted, redemption_id, expires_at
+             FROM redemptions
+             WHERE user_id = $1
+             AND expires_at > NOW()
+             ORDER BY created_at DESC`,
+            [req.user.id]
+        );
+        res.json({ success: true, redemptions: result.rows });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: "Server error" });
+    }
+});
+
 module.exports = router;

@@ -82,6 +82,8 @@
 .reward-cost {
   font-size: 13px;
   color: #7A7468;
+  text-align: center;
+  display: block;
 }
 
 .qr-container {
