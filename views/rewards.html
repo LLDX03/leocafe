@@ -1,158 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leo's Cafe — Rewards</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../public/css/rewards.css">
-<link rel="stylesheet" href="../public/css/redemption.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo's Cafe — Rewards</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../public/css/rewards.css">
+  <link rel="stylesheet" href="../public/css/redemption.css">
 
 
 </head>
+
 <body>
 
-<nav class="top-nav">
-  <a class="nav-brand" href="index.html">Leo's Cafe</a>
-  <div class="nav-links">
-    <a class="nav-pill active" href="points.html"><i class="ti ti-award"></i> Rewards</a>
-    <div class="nav-divider"></div>
-    <a class="nav-pill" href="reserve.html"><i class="ti ti-calendar"></i> Reserve</a>
-    <div class="nav-divider"></div>
-    <a class="nav-pill" href="order.html"><i class="ti ti-shopping-bag"></i> Order Ahead</a>
-    <div class="nav-divider"></div>
-    <a class="nav-pill" href="index.html"><i class="ti ti-menu-2"></i> Menu</a>
-  </div>
-</nav>
+  <nav class="top-nav">
+    <a class="nav-brand" href="index.html">Leo's Cafe</a>
+    <div class="nav-links">
+      <a class="nav-pill active" href="rewards.html"><i class="ti ti-award"></i> Rewards</a>
+      <a class="nav-pill" href="reserve.html"><i class="ti ti-calendar"></i> Reserve</a>
+      <div class="nav-divider"></div>
+      <a class="nav-pill" href="order.html"><i class="ti ti-shopping-bag"></i> Order Ahead</a>
+      <div class="nav-divider"></div>
+      <a class="nav-pill" href="index.html"><i class="ti ti-menu-2"></i> Menu</a>
+    </div>
+  </nav>
 
-<div class="hero">
-  <div class="points-card">
-    <div class="card-left">
-      <div class="card-greeting">Member since 2026</div>
-      <div class="card-name" id="cardName"></div>
-      <div class="card-pts-row">
-        <div class="card-pts-num" id="cardPts">240</div>
-        <div class="card-pts-label">points</div>
-      </div>
-      <div class="card-progress">
-        <div class="progress-label">
-          <span>Next reward at 300 pts</span>
-          <span id="progressPct">80%</span>
+  <div class="hero">
+    <div class="points-card">
+      <div class="card-left">
+        <div class="card-greeting">Member since 2026</div>
+        <div class="card-name" id="cardName"></div>
+        <div class="card-pts-row">
+          <div class="card-pts-num" id="cardPts">240</div>
+          <div class="card-pts-label">points</div>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="progressFill" style="width:80%"></div>
+        <div class="card-progress">
+          <div class="progress-label">
+            <span>Next reward at 300 pts</span>
+            <span id="progressPct">80%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill" style="width:80%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-right">
+        <div class="card-badge">
+          <div class="card-badge-icon"><i class="ti ti-cake"></i></div>
+          <div class="card-badge-label">Birthday</div>
+          <div class="card-badge-val" id="birthday"></div>
+        </div>
+        <div class="card-badge">
+          <div class="card-badge-icon"><i class="ti ti-trophy"></i></div>
+          <div class="card-badge-label">Tier</div>
+          <div class="card-badge-val" id="tier"></div>
         </div>
       </div>
     </div>
-    <div class="card-right">
-      <div class="card-badge">
-        <div class="card-badge-icon"><i class="ti ti-cake"></i></div>
-        <div class="card-badge-label">Birthday</div>
-        <div class="card-badge-val" id="birthday"></div>
-      </div>
-      <div class="card-badge">
-        <div class="card-badge-icon"><i class="ti ti-trophy"></i></div>
-        <div class="card-badge-label">Tier</div>
-        <div class="card-badge-val" id="tier"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="section-wrap">
-
-  <!-- Free Drink Rewards -->
-  <div class="section-head">
-    <h2>Free Drinks</h2>
-    <span>Redeem with points</span>
-  </div>
-  <div class="rewards-grid">
-    <div class="reward-card">
-      <div class="reward-type">Espresso</div>
-      <div class="reward-icon"><i class="ti ti-coffee"></i></div>
-      <div class="reward-name">Free Espresso</div>
-      <div class="reward-desc">Any single or double shot. No strings attached.</div>
-      <div class="reward-footer">
-        <div class="reward-cost"><i class="ti ti-star"></i> 100 pts</div>
-        <button class="btn-redeem" onclick="redeem(this, 100, 'Free Espresso')">Redeem</button>
-      </div>
-    </div>
-    <div class="reward-card">
-      <div class="reward-type">Latte</div>
-      <div class="reward-icon"><i class="ti ti-glass"></i></div>
-      <div class="reward-name">Free Latte</div>
-      <div class="reward-desc">Any latte from our menu, any milk of your choice.</div>
-      <div class="reward-footer">
-        <div class="reward-cost"><i class="ti ti-star"></i> 200 pts</div>
-        <button class="btn-redeem" onclick="redeem(this, 200, 'Free Latte')">Redeem</button>
-      </div>
-    </div>
-    <div class="reward-card locked">
-      <div class="lock-badge"><i class="ti ti-lock"></i> 300 pts needed</div>
-      <div class="reward-type">Signature</div>
-      <div class="reward-icon"><i class="ti ti-star"></i></div>
-      <div class="reward-name">Free Signature Drink</div>
-      <div class="reward-desc">Any signature creation — Café de Fleur, Dorée Fizz, and more.</div>
-      <div class="reward-footer">
-        <div class="reward-cost"><i class="ti ti-star"></i> 300 pts</div>
-        <button class="btn-redeem" disabled>Redeem</button>
-      </div>
-    </div>
-    <div class="reward-card locked">
-      <div class="lock-badge"><i class="ti ti-lock"></i> 500 pts needed</div>
-      <div class="reward-type">Premium</div>
-      <div class="reward-icon"><i class="ti ti-award"></i></div>
-      <div class="reward-name">Siphon Brew for Two</div>
-      <div class="reward-desc">Our reserve Siphon Brew experience, complimentary for two guests.</div>
-      <div class="reward-footer">
-        <div class="reward-cost"><i class="ti ti-star"></i> 500 pts</div>
-        <button class="btn-redeem" disabled>Redeem</button>
-      </div>
-    </div>
   </div>
 
-  <!-- Discount Rewards -->
-  <div class="section-head">
-    <h2>Discounts</h2>
-    <span>Off your next order</span>
-  </div>
-  <div class="rewards-grid">
-    <div class="reward-card">
-      <div class="reward-type">Discount</div>
-      <div class="reward-icon"><i class="ti ti-tag"></i></div>
-      <div class="reward-name">$2 Off</div>
-      <div class="reward-desc">Applied to any order of $8 or more.</div>
-      <div class="reward-footer">
-        <div class="reward-cost"><i class="ti ti-star"></i> 50 pts</div>
-        <button class="btn-redeem" onclick="redeem(this, 50, '$2 Off')">Redeem</button>
+  <div class="section-wrap">
+
+    <!-- Free Drink Rewards -->
+    <div class="section-head">
+      <h2>Free Drinks</h2>
+      <span>Redeem with points</span>
+      <a href="qrpage.html" class="btn-active-qr">
+        <i class="ti ti-qrcode"></i> My Active QR Codes
+      </a>
+    </div>
+    <div class="rewards-grid">
+      <div class="reward-card" data-base-cost="100">
+        <div class="reward-type">Espresso</div>
+        <div class="reward-icon"><i class="ti ti-coffee"></i></div>
+        <div class="reward-name">Free Espresso</div>
+        <div class="reward-desc">Any single or double shot. No strings attached.</div>
+        <div class="reward-footer">
+          <div class="reward-cost"><i class="ti ti-star"></i> 100 pts</div>
+          <button class="btn-redeem" onclick="redeem(this, 100, 'Free Espresso')">Redeem</button>
+        </div>
+      </div>
+      <div class="reward-card" data-base-cost="200">
+        <div class="reward-type">Latte</div>
+        <div class="reward-icon"><i class="ti ti-glass"></i></div>
+        <div class="reward-name">Free Latte</div>
+        <div class="reward-desc">Any latte from our menu, any milk of your choice.</div>
+        <div class="reward-footer">
+          <div class="reward-cost"><i class="ti ti-star"></i> 200 pts</div>
+          <button class="btn-redeem" onclick="redeem(this, 200, 'Free Latte')">Redeem</button>
+        </div>
+      </div>
+      <div class="reward-card" data-base-cost="300">
+        <div class="lock-badge"><i class="ti ti-lock"></i> 300 pts needed</div>
+        <div class="reward-type">Signature</div>
+        <div class="reward-icon"><i class="ti ti-star"></i></div>
+        <div class="reward-name">Free Signature Drink</div>
+        <div class="reward-desc">Any signature creation — Café de Fleur, Dorée Fizz, and more.</div>
+        <div class="reward-footer">
+          <div class="reward-cost"><i class="ti ti-star"></i> 300 pts</div>
+          <button class="btn-redeem" onclick="redeem(this, 300, 'Free Signature Drink')">Redeem</button>
+        </div>
+      </div>
+      <div class="reward-card" data-base-cost="500">
+        <div class="lock-badge"><i class="ti ti-lock"></i> 500 pts needed</div>
+        <div class="reward-type">Premium</div>
+        <div class="reward-icon"><i class="ti ti-award"></i></div>
+        <div class="reward-name">Siphon Brew for Two</div>
+        <div class="reward-desc">Our reserve Siphon Brew experience, complimentary for two guests.</div>
+        <div class="reward-footer">
+          <div class="reward-cost"><i class="ti ti-star"></i> 500 pts</div>
+          <button class="btn-redeem" onclick="redeem(this, 500, 'Siphon Brew for Two')">Redeem</button>
+        </div>
       </div>
     </div>
-    <div class="reward-card">
-      <div class="reward-type">Discount</div>
-      <div class="reward-icon"><i class="ti ti-receipt-off"></i></div>
-      <div class="reward-name">$5 Off</div>
-      <div class="reward-desc">Applied to any order of $15 or more.</div>
-      <div class="reward-footer">
-        <div class="reward-cost"><i class="ti ti-star"></i> 120 pts</div>
-        <button class="btn-redeem" onclick="redeem(this, 120, '$5 Off')">Redeem</button>
+
+    <!-- Discount Rewards -->
+    <div class="section-head">
+      <h2>Discounts</h2>
+      <span>Off your next order</span>
+    </div>
+    <div class="rewards-grid">
+      <div class="reward-card" data-base-cost="50">
+        <div class="reward-type">Discount</div>
+        <div class="reward-icon"><i class="ti ti-tag"></i></div>
+        <div class="reward-name">$2 Off</div>
+        <div class="reward-desc">Applied to any order of $8 or more.</div>
+        <div class="reward-footer">
+          <div class="reward-cost"><i class="ti ti-star"></i> 50 pts</div>
+          <button class="btn-redeem" onclick="redeem(this, 50, '$2 Off')">Redeem</button>
+        </div>
       </div>
+      <div class="reward-card" data-base-cost="120">
+        <div class="reward-type">Discount</div>
+        <div class="reward-icon"><i class="ti ti-receipt-off"></i></div>
+        <div class="reward-name">$5 Off</div>
+        <div class="reward-desc">Applied to any order of $15 or more.</div>
+        <div class="reward-footer">
+          <div class="reward-cost"><i class="ti ti-star"></i> 120 pts</div>
+          <button class="btn-redeem" onclick="redeem(this, 120, '$5 Off')">Redeem</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div class="section-head">
+      <h2>History</h2>
+      <span>Recent activity</span>
+    </div>
+    <div class="history-list" id="historyList">
+      <!-- History items will be added here by JavaScript -->
     </div>
   </div>
 
-  <!-- History -->
-  <div class="section-head">
-    <h2>History</h2>
-    <span>Recent activity</span>
-  </div>
-  <div class="history-list" id="historyList">
-    <!-- History items will be added here by JavaScript -->
-  </div>
-</div>
+  <div class="toast" id="toast"></div>
 
-<div class="toast" id="toast"></div>
 
-<script src="../public/js/rewards.js"></script>
+  
+  <script src="../public/js/rewards.js"></script>
 
 </body>
+
 </html>

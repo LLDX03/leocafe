@@ -77,4 +77,26 @@ router.get("/slots", authMiddleware, async (req, res) => {
     }
 });
 
+
+router.get("/taken", authMiddleware, async (req, res) => {
+  const { date } = req.query;
+  if (!date) return res.json({ success: false, message: "Date required" });
+
+  try {
+    const result = await pool.query(
+      "SELECT time FROM reservations WHERE date = $1 AND status = 'confirmed'",
+      [date]
+    );
+
+    res.json({
+      success: true,
+      takenSlots: result.rows.map(r => r.time)
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.json({ success: false, message: "Server error" });
+  }
+});
+
 module.exports = router;

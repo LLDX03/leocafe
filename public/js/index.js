@@ -7,11 +7,7 @@ if (!token || !expiry || Date.now() > expiry) {
   localStorage.removeItem("token_expiry");
   window.location.replace("/views/login.html");
 }
-if (Date.now() > expiry) {
-  localStorage.removeItem("token");
-  localStorage.removeItem("token_expiry");
-  window.location.href = "/views/login.html";
-}
+
 
 tabs.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -50,11 +46,21 @@ fetch("http://localhost:3000/auth/me", {
     } else {
       document.getElementById("birthday").textContent = "Not set";
     }
-    
+
     const strip = document.getElementById('memberStrip');
     strip.style.display = 'flex';
     document.getElementById('stripName').textContent = 'Welcome back, ' + user.username;
     document.getElementById('stripAvatar').textContent = user.username.charAt(0).toUpperCase();
+    document.getElementById('toggleName').textContent = user.username;
 
     console.log("User data:", user);
   });
+
+function logout() {
+  if (confirm('Are you sure you want to sign out?')) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("token_expiry");
+    localStorage.removeItem("leos_username");
+    window.location.href = 'login.html';
+  }
+}

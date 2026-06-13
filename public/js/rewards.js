@@ -1,150 +1,205 @@
-// Get token from localStorage
 const token = localStorage.getItem("token");
 const expiry = localStorage.getItem("token_expiry");
 
-// Check if logged in
 if (!token || !expiry || Date.now() > expiry) {
   localStorage.removeItem("token");
   localStorage.removeItem("token_expiry");
   window.location.replace("/views/login.html");
 }
 
-// Global points variable
 let pts = 0;
+let totalPts = 0;
+let userTier = "Bronze";
 
-// Fetch user data from backend
+
+
+// Tier config
+const TIER_CONFIG = {
+  Bronze: { discount: 0,    next: 1000, label: "Bronze" },
+  Silver: { discount: 0.05, next: 5000, label: "Silver" },
+  Gold:   { discount: 0.10, next: null, label: "Gold"   }
+};
+
 fetch("http://localhost:3000/auth/me", {
-  headers: {
-    Authorization: `Bearer ${token}`
-  }
+  headers: { Authorization: `Bearer ${token}` }
 })
   .then(res => res.json())
   .then(data => {
-    if (!data.success) {
-      window.location.href = "/views/login.html";
-      return;
-    }
+    if (!data.success) { window.location.href = "/views/login.html"; return; }
 
     const user = data.user;
+    pts = user.points;
+    totalPts = user.total_points || user.points;
+    userTier = user.tier || "Bronze";
 
-    // Update UI with user data
     document.getElementById("cardName").textContent = user.username;
 
-    // Member since year (from createdAt or use current year)
-    const memberYear = user.createdAt ? new Date(user.createdAt).getFullYear() : new Date().getFullYear();
-    const memberGreeting = document.querySelector('.card-greeting');
-    if (memberGreeting) {
-      memberGreeting.textContent = `Member since ${memberYear}`;
-    }
+    const memberYear = user.createdAt
+      ? new Date(user.createdAt).getFullYear()
+      : new Date().getFullYear();
+    document.querySelector('.card-greeting').textContent = `Member since ${memberYear}`;
 
-    // Birthday with null check
     if (user.birthday) {
       document.getElementById("birthday").textContent =
-        new Date(user.birthday).toLocaleDateString("en-GB", {
-          day: "numeric",
-          month: "short"
-        });
+        new Date(user.birthday).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
     } else {
       document.getElementById("birthday").textContent = "Not set";
     }
 
-    // Tier (from backend, default to 'Bronze')
-    document.getElementById("tier").textContent = user.tier || "Bronze";
+    document.getElementById("tier").textContent = userTier;
 
-    // Set global points and update display
-    pts = user.points;
     updatePts();
-
-    // Update reward card states based on points
-    updateRewardCardStates();
-
-    console.log("User data:", user);
+    updateRewardCards();
+    loadHistory();
   })
-  .catch(err => {
-    console.error("Error loading user:", err);
-    alert("Failed to load user data");
-  });
+  .catch(() => showToast("Failed to load user data"));
 
 function updatePts() {
   document.getElementById('cardPts').textContent = pts;
 
-  const pct = Math.min(Math.round((pts / 300) * 100), 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressPct').textContent = pct + '%';
+  const config = TIER_CONFIG[userTier];
+  const nextTierPts = config.next;
+
+  if (nextTierPts) {
+    const pct = Math.min(Math.round((totalPts / nextTierPts) * 100), 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.querySelector('.progress-label span').textContent =
+      `${totalPts} / ${nextTierPts} pts to ${userTier === 'Bronze' ? 'Silver' : 'Gold'}`;
+  } else {
+    // Gold — max tier
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressPct').textContent = 'Max';
+    document.querySelector('.progress-label span').textContent = 'Gold tier — maximum tier reached';
+  }
 }
 
-// Function to enable/disable reward cards based on user's points
-function updateRewardCardStates() {
-  // Get all reward buttons with their cost
-  const redeemButtons = document.querySelectorAll('.btn-redeem');
-  
-  redeemButtons.forEach(btn => {
-    // Find the cost from parent card
-    const card = btn.closest('.reward-card');
-    const costText = card.querySelector('.reward-cost');
-    
-    // Extract the number from cost text (e.g., "100 pts" → 100)
-    const costMatch = costText.textContent.match(/\d+/);
-    const cost = costMatch ? parseInt(costMatch[0]) : 0;
-    
-    // Enable/disable button based on whether user has enough points
-    if (pts >= cost) {
+function getDiscountedCost(baseCost) {
+  const discount = TIER_CONFIG[userTier]?.discount || 0;
+  return Math.round(baseCost * (1 - discount));
+}
+
+function updateRewardCards() {
+  const discount = TIER_CONFIG[userTier]?.discount || 0;
+
+  document.querySelectorAll('.reward-card').forEach(card => {
+    const costEl = card.querySelector('.reward-cost');
+    if (!costEl) return;
+
+    const baseCost = parseInt(card.dataset.baseCost);
+    if (!baseCost) return;
+
+    const finalCost = getDiscountedCost(baseCost);
+    const btn = card.querySelector('.btn-redeem');
+
+    if (discount > 0) {
+      costEl.innerHTML = `
+        <i class="ti ti-star"></i>
+        <span style="text-decoration:line-through;opacity:0.5;margin-right:4px;">${baseCost}</span>
+        <span style="color:var(--sage-deep);font-weight:500;">${finalCost} pts</span>
+        <span style="font-size:9px;background:rgba(61,92,66,0.1);color:var(--sage-deep);padding:2px 6px;border-radius:4px;margin-left:4px;">${Math.round(discount*100)}% off</span>
+      `;
+    } else {
+      costEl.innerHTML = `<i class="ti ti-star"></i> ${baseCost} pts`;
+    }
+
+    if (pts >= finalCost) {
       btn.disabled = false;
       card.classList.remove('locked');
-      
-      // Remove lock badge if it exists
       const lockBadge = card.querySelector('.lock-badge');
-      if (lockBadge) {
-        lockBadge.remove();
-      }
+      if (lockBadge) lockBadge.remove();
     } else {
       btn.disabled = true;
       card.classList.add('locked');
-      
-      // Add lock badge if it doesn't exist
       if (!card.querySelector('.lock-badge')) {
-        const lockBadge = document.createElement('div');
-        lockBadge.className = 'lock-badge';
-        lockBadge.innerHTML = `<i class="ti ti-lock"></i> ${cost} pts needed`;
-        card.insertBefore(lockBadge, card.firstChild);
+        const badge = document.createElement('div');
+        badge.className = 'lock-badge';
+        badge.innerHTML = `<i class="ti ti-lock"></i> ${finalCost} pts needed`;
+        card.insertBefore(badge, card.firstChild);
       }
     }
   });
 }
 
-function redeem(btn, cost, name) {
-  if (pts < cost) {
-    showToast('Not enough points!');
-    return;
-  }
+function redeem(btn, baseCost, name) {
+  const finalCost = getDiscountedCost(baseCost);
 
-  // Deduct points on frontend
-  pts -= cost;
-  updatePts();
-  updateRewardCardStates();
-  
-  btn.textContent = 'Redeemed!';
-  btn.disabled = true;
+  if (pts < finalCost) { showToast('Not enough points!'); return; }
 
-  // Generate unique redemption ID
   const redemptionId = 'RDM-' + Math.random().toString(36).substr(2, 6).toUpperCase();
 
-  // Send deduction to backend
-  deductPointsFromBackend(cost, name, redemptionId);
+  fetch("http://localhost:3000/rewards/redeem", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ baseCost, rewardName: name, redemptionId })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (!data.success) { showToast(data.message || 'Error redeeming'); return; }
 
-  // Show redemption modal
-  showRedemptionModal(name, cost, redemptionId);
+      pts = data.newPoints;
+      updatePts();
+      updateRewardCards();
 
-  // Add to history
+      btn.textContent = 'Redeemed!';
+      btn.disabled = true;
+
+      addHistoryItem(name, data.finalCost);
+      showToast('☕ ' + name + ' redeemed! Show QR at the counter.');
+
+      // Open QR page after short delay
+      setTimeout(() => { window.location.href = 'qrpage.html'; }, 1500);
+    })
+    .catch(() => showToast('Error connecting to server'));
+}
+
+async function loadHistory() {
+  try {
+    const res = await fetch("http://localhost:3000/rewards/history", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (!data.success) return;
+
+    const list = document.getElementById('historyList');
+    list.innerHTML = '';
+
+    if (data.history.length === 0) {
+      list.innerHTML = '<p style="font-size:13px;color:var(--warm-gray);padding:16px 0;">No redemptions yet.</p>';
+      return;
+    }
+
+    data.history.forEach(h => {
+      const date = new Date(h.created_at).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      });
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      item.innerHTML = `
+        <div class="history-icon redeem"><i class="ti ti-award"></i></div>
+        <div class="history-info">
+          <div class="history-name">Redeemed — ${h.reward_name}</div>
+          <div class="history-date">${date}</div>
+        </div>
+        <div class="history-pts redeem">−${h.points_deducted} pts</div>
+      `;
+      list.appendChild(item);
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function addHistoryItem(name, cost) {
   const list = document.getElementById('historyList');
+  const today = new Date().toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
   const item = document.createElement('div');
   item.className = 'history-item';
-  const today = new Date().toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  });
-
   item.innerHTML = `
     <div class="history-icon redeem"><i class="ti ti-award"></i></div>
     <div class="history-info">
@@ -153,108 +208,7 @@ function redeem(btn, cost, name) {
     </div>
     <div class="history-pts redeem">−${cost} pts</div>
   `;
-
   list.prepend(item);
-  showToast('☕ ' + name + ' redeemed!');
-}
-
-function deductPointsFromBackend(cost, rewardName, redemptionId) {
-  const token = localStorage.getItem("token");
-  
-  fetch("http://localhost:3000/rewards", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      pointsDeducted: cost,
-      rewardName: rewardName,
-      redemptionId: redemptionId
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        console.log("Points deducted from database");
-      } else {
-        console.error("Failed to deduct points:", data.message);
-        showToast("Error saving redemption");
-      }
-    })
-    .catch(err => {
-      console.error("Error deducting points:", err);
-      showToast("Error saving redemption");
-    });
-}
-
-function showRedemptionModal(rewardName, cost, redemptionId) {
-  // Create modal HTML
-  const modal = document.createElement('div');
-  modal.className = 'redemption-modal-backdrop';
-  modal.innerHTML = `
-    <div class="redemption-modal-card">
-      <div class="modal-header">
-        <div class="success-icon">✓</div>
-        <div class="modal-title">Redeemed!</div>
-        <div class="modal-subtitle">Show this QR at the counter</div>
-      </div>
-
-      <div class="reward-details">
-        <div class="reward-name">${rewardName}</div>
-        <div class="reward-cost">${cost} pts used</div>
-      </div>
-
-      <div class="qr-container" id="qrContainer"></div>
-
-      <div class="ref-number">
-        <div class="ref-label">Redemption ID</div>
-        <div class="ref-value">${redemptionId}</div>
-      </div>
-
-      <div class="validity-text">Valid for 24 hours</div>
-
-      <button class="btn-close" onclick="closeRedemptionModal()">Close</button>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-
-  // Generate QR code
-  generateQRCode(redemptionId, 'qrContainer');
-}
-
-function closeRedemptionModal() {
-  const modal = document.querySelector('.redemption-modal-backdrop');
-  if (modal) {
-    modal.remove();
-  }
-}
-
-function generateQRCode(text, containerId) {
-  // Load QR code library
-  const script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-  
-  script.onload = () => {
-    const container = document.getElementById(containerId);
-    if (container) {
-      // Clear any existing content
-      container.innerHTML = '';
-      
-      // Create a new QR code and append to container
-      new QRCode(container, {
-        text: text,
-        width: 200,
-        height: 200,
-        colorDark: '#1E1E1B',
-        colorLight: '#FFFFFF',
-        correctLevel: QRCode.CorrectLevel.H
-      });
-    }
-  };
-  
-  document.head.appendChild(script);
 }
 
 function showToast(msg) {

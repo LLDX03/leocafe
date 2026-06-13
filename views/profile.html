@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo's Cafe — Profile</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../public/css/profile.css">
+</head>
+
+<body>
+
+  <nav class="top-nav">
+    <a class="nav-brand" href="index.html">Leo's Cafe</a>
+    <div class="nav-links">
+      <a class="nav-pill" href="rewards.html"><i class="ti ti-award"></i> Rewards</a>
+      <div class="nav-divider"></div>
+      <a class="nav-pill" href="reserve.html"><i class="ti ti-calendar"></i> Reserve</a>
+      <div class="nav-divider"></div>
+      <a class="nav-pill" href="order.html"><i class="ti ti-shopping-bag"></i> Order Ahead</a>
+      <div class="nav-divider"></div>
+      <a class="nav-pill" href="index.html"><i class="ti ti-menu-2"></i> Menu</a>
+    </div>
+  </nav>
+
+  <div class="profile-container">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-header-ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line right"></div>
+      </div>
+      <div class="page-title">Your Profile</div>
+      <div class="page-subtitle">Account & Preferences</div>
+    </div>
+
+    <!-- Basic Information Card -->
+    <div class="card view-mode" id="basicInfoCard">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Basic Information</div>
+          <div class="card-subtitle">Username and birthday</div>
+        </div>
+        <button class="edit-btn" onclick="toggleBasicInfoEdit()">Edit</button>
+      </div>
+
+      <!-- View Mode -->
+      <div class="field-group">
+        <label class="field-label">Username</label>
+        <p class="field-value" id="usernameView"></p>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Birthday</label>
+        <p class="field-value" id="birthdayView">Not set</p>
+      </div>
+
+      <!-- Edit Mode -->
+      <div class="field-group edit-only" style="display:none;">
+        <label class="field-label">Username</label>
+        <input class="field-input" id="usernameEdit" type="text">
+      </div>
+      <div class="field-group edit-only" style="display:none;">
+        <label class="field-label">Birthday</label>
+        <input class="field-input" id="birthdayEdit" type="date">
+      </div>
+      <div class="button-group edit-only" style="display:none;">
+        <button class="btn-save" onclick="saveBasicInfo()">Save Changes</button>
+        <button class="btn-cancel" onclick="toggleBasicInfoEdit()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Email Card -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Email Address</div>
+          <div class="card-subtitle" id="emailDisplay"></div>
+        </div>
+        <button class="edit-btn" onclick="openChangeEmailModal()">Change</button>
+      </div>
+    </div>
+
+    <!-- Password Card -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Password</div>
+          <div class="card-subtitle">Keep your account secure with a strong password.</div>
+        </div>
+        <button class="edit-btn" onclick="openChangePasswordModal()">Change</button>
+      </div>
+    </div>
+
+    <!-- Account Status Card -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Account Status</div>
+          <div class="card-subtitle">Your loyalty standing</div>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Loyalty Points</div>
+          <div class="stat-value" id="pointsDisplay">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Member Tier</div>
+          <div class="stat-value" id="tierDisplay">Bronze</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="field-group">
+        <label class="field-label">Member Since</label>
+        <p class="field-value" id="memberSinceDisplay"></p>
+      </div>
+    </div>
+
+    <!-- Settings Card -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Account Settings</div>
+          <div class="card-subtitle">Signed in as <span id="emailSignedIn"></span></div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">
+        <i class="ti ti-logout"></i> Sign Out
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Change Email Modal -->
+  <div class="modal-backdrop" id="changeEmailModal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">Change Email Address</div>
+        <button class="modal-close" onclick="closeChangeEmailModal()"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-step" id="emailStep1">
+          <p class="step-label">Step 1 — New Email</p>
+          <input class="field-input" id="newEmailInput" type="email" placeholder="newemail@example.com">
+          <button class="btn-primary" onclick="sendEmailCode()">Send Verification Code</button>
+        </div>
+        <div class="modal-step" id="emailStep2" style="display:none;">
+          <p class="step-label">Step 2 — Verify Code</p>
+          <p style="font-size:12px;color:var(--warm-gray);margin-bottom:14px;line-height:1.6;">Enter the 6-digit code
+            sent to your current email.</p>
+          <input class="field-input" id="emailCodeInput" type="text" placeholder="000000" maxlength="6"
+            style="text-align:center;font-size:20px;letter-spacing:4px;">
+          <button class="btn-primary" onclick="verifyEmailCode()">Confirm New Email</button>
+          <button class="btn-secondary" onclick="resetEmailSteps()">Back</button>
+        </div>
+        <div class="modal-step" id="emailStep3" style="display:none;">
+          <div class="success-message">
+            <div class="success-icon"><i class="ti ti-check"></i></div>
+            <p class="success-text">Email updated successfully!</p>
+          </div>
+          <button class="btn-primary" onclick="closeChangeEmailModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div class="modal-backdrop" id="changePasswordModal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">Change Password</div>
+        <button class="modal-close" onclick="closeChangePasswordModal()"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-step" id="pwStep1">
+          <p class="step-label">Step 1 — Current Password</p>
+          <input class="field-input" id="currentPasswordInput" type="password" placeholder="••••••••">
+          <button class="btn-primary" onclick="sendPasswordCode()">Send Verification Code</button>
+        </div>
+        <div class="modal-step" id="pwStep2" style="display:none;">
+          <p class="step-label">Step 2 — New Password & Code</p>
+          <input class="field-input" id="newPasswordInput" type="password" placeholder="New password">
+          <input class="field-input" id="passwordCodeInput" type="text" placeholder="Verification code" maxlength="6"
+            style="text-align:center;font-size:20px;letter-spacing:4px;margin-top:10px;">
+          <p style="font-size:11px;color:var(--warm-gray);margin:10px 0 14px;line-height:1.6;">Code sent to your email.
+            Password must be at least 6 characters.</p>
+          <button class="btn-primary" onclick="verifyPasswordChange()">Update Password</button>
+          <button class="btn-secondary" onclick="resetPasswordSteps()">Back</button>
+        </div>
+        <div class="modal-step" id="pwStep3" style="display:none;">
+          <div class="success-message">
+            <div class="success-icon"><i class="ti ti-check"></i></div>
+            <p class="success-text">Password updated successfully!</p>
+          </div>
+          <button class="btn-primary" onclick="closeChangePasswordModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="../public/js/profile.js"></script>
+</body>
+
+</html>

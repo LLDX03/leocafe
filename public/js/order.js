@@ -100,22 +100,39 @@ function removeItem(name) {
     renderCart();
 }
 
-function placeOrder() {
+async function placeOrder() {
     const items = Object.values(cart);
     if (items.length === 0) return;
+
+    const token = localStorage.getItem("token");
+    const subtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
+    const earnPts = Math.round(subtotal * 10);
+
+    try {
+        const res = await fetch("http://localhost:3000/rewards/earn", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ pointsEarned: earnPts })
+        });
+
+        const data = await res.json();
+        if (!data.success) {
+            showToast("Error saving points");
+            return;
+        }
+    } catch (err) {
+        showToast("Server error");
+        return;
+    }
+
     const ref = '#LC-' + Math.floor(1000 + Math.random() * 9000);
     const timeBtn = document.querySelector('.time-opt.active');
     const pickupTime = timeBtn ? timeBtn.textContent.split(' ·')[0] : 'soon';
     document.getElementById('orderRef').textContent = ref;
     document.getElementById('orderMsg').textContent = 'Ready for pickup at ' + pickupTime + '. Show this reference at the counter.';
-
-    // Award points
-    const subtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
-    const earnPts = Math.round(subtotal * 10);
-    let pts = parseInt(localStorage.getItem('leos_points') || '240');
-    pts += earnPts;
-    localStorage.setItem('leos_points', pts);
-
     document.getElementById('successOverlay').classList.add('show');
 }
 

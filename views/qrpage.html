@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo's Cafe — Active QR Codes</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../public/css/qrpage.css">
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a class="nav-brand" href="index.html">Leo's Cafe</a>
+    <div class="nav-links">
+      <a class="nav-pill active" href="rewards.html"><i class="ti ti-award"></i> Rewards</a>
+      <div class="nav-divider"></div>
+      <a class="nav-pill" href="reserve.html"><i class="ti ti-calendar"></i> Reserve</a>
+      <div class="nav-divider"></div>
+      <a class="nav-pill" href="order.html"><i class="ti ti-shopping-bag"></i> Order Ahead</a>
+      <div class="nav-divider"></div>
+      <a class="nav-pill" href="index.html"><i class="ti ti-menu-2"></i> Menu</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-header">
+      <a href="rewards.html" class="back-link"><i class="ti ti-arrow-left"></i> Back to Rewards</a>
+      <div class="page-eyebrow">Active Redemptions</div>
+      <div class="page-title">My QR Codes</div>
+      <p class="page-sub">Valid for 24 hours from redemption. Show at the counter to redeem.</p>
+    </div>
+
+    <div class="qr-list" id="qrList">
+      <!-- QR cards injected here -->
+    </div>
+
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <i class="ti ti-qrcode-off"></i>
+      <p>No active QR codes.</p>
+      <a href="rewards.html" class="btn-back">Redeem a reward</a>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="../public/js/qrpage.js"></script>
+
+</body>
+</html>
