@@ -53,7 +53,6 @@ fetch("http://localhost:3000/auth/me", {
     document.getElementById('stripAvatar').textContent = user.username.charAt(0).toUpperCase();
     document.getElementById('toggleName').textContent = user.username;
 
-    console.log("User data:", user);
   });
 
 function logout() {
