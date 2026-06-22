@@ -143,6 +143,25 @@ The system simulates a real cafe platform where users can browse menus, place or
 
 ---
 
+## 📸 Screenshots
+
+**Login**
+![Login](docs/login.png)
+
+**Menu**
+![Menu](docs/menu.png)
+
+**Order Ahead**
+![Order Ahead](docs/order-ahead.png)
+
+**Loyalty Rewards**
+![Rewards](docs/rewards.png)
+
+**Table Reservation**
+![Reservation](docs/reservation.png)
+
+---
+
 ## 💡 Inspiration
 
 Always wanted to open a café someday 
