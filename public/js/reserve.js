@@ -7,8 +7,9 @@ if (!token || !expiry || Date.now() > parseInt(expiry)) {
   window.location.replace("/login");
 }
 
-// Set min date to today
-const today = new Date().toISOString().split('T')[0];
+// Set min date to today (local time, not UTC)
+const _now = new Date();
+const today = `${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,'0')}-${String(_now.getDate()).padStart(2,'0')}`;
 document.getElementById('resDate').min = today;
 document.getElementById('resDate').value = today;
 
@@ -35,7 +36,7 @@ function updateSlotAvailability() {
       if (period === 'AM' && hours === 12) hours = 0;
       const slotMinutes = hours * 60 + minutes;
 
-      if (slotMinutes <= currentMinutes) {
+      if (slotMinutes <= currentMinutes + 30) {
         btn.classList.add('full');
         btn.disabled = true;
         // Deselect if this slot was selected
