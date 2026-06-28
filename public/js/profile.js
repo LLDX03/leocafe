@@ -18,7 +18,7 @@ async function loadUserProfile() {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/profile", {
+    const res = await fetch("/api/profile", {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -103,7 +103,7 @@ async function saveBasicInfo() {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/profile/update", {
+    const res = await fetch("/api/profile/update", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -173,7 +173,7 @@ async function sendEmailCode() {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/profile/send-email-code", {
+    const res = await fetch("/api/profile/send-email-code", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -208,7 +208,7 @@ async function verifyEmailCode() {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/profile/verify-email-change", {
+    const res = await fetch("/api/profile/verify-email-change", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -268,7 +268,7 @@ async function sendPasswordCode() {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/profile/send-password-code", {
+    const res = await fetch("/api/profile/send-password-code", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -309,7 +309,7 @@ async function verifyPasswordChange() {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/profile/change-password", {
+    const res = await fetch("/api/profile/change-password", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

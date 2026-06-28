@@ -20,7 +20,7 @@ const TIER_CONFIG = {
   Gold:   { discount: 0.10, next: null, label: "Gold"   }
 };
 
-fetch("http://localhost:3000/auth/me", {
+fetch("/auth/me", {
   headers: { Authorization: `Bearer ${token}` }
 })
   .then(res => res.json())
@@ -128,7 +128,7 @@ function redeem(btn, baseCost, name) {
 
   const redemptionId = 'RDM-' + Math.random().toString(36).substr(2, 6).toUpperCase();
 
-  fetch("http://localhost:3000/rewards/redeem", {
+  fetch("/api/rewards/redeem", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -158,7 +158,7 @@ function redeem(btn, baseCost, name) {
 
 async function loadHistory() {
   try {
-    const res = await fetch("http://localhost:3000/rewards/history", {
+    const res = await fetch("/api/rewards/history", {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();

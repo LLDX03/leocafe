@@ -24,7 +24,7 @@ tabs.forEach(btn => {
 
 /* ---------------- AUTH CHECK ---------------- */
 
-fetch("http://localhost:3000/auth/me", {
+fetch("/auth/me", {
   headers: { Authorization: `Bearer ${token}` }
 })
   .then(res => res.json())

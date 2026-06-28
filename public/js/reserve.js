@@ -81,7 +81,7 @@ function selectSlot(btn) {
 async function loadTakenSlots(date) {
   if (!date) return;
   try {
-    const res = await fetch(`http://localhost:3000/reservations/taken?date=${date}`, {
+    const res = await fetch(`/reservations/taken?date=${date}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
@@ -114,7 +114,7 @@ async function loadTakenSlots(date) {
 // Load existing reservations
 async function loadReservations() {
   try {
-    const res = await fetch('http://localhost:3000/reservations', {
+    const res = await fetch('/reservations', {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
@@ -157,7 +157,7 @@ async function submitReservation() {
   const specialReq = document.getElementById('specialReq').value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/reservations', {
+    const res = await fetch('/reservations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -196,7 +196,7 @@ async function submitReservation() {
 
 async function cancelRes(btn, id) {
   try {
-    const res = await fetch(`http://localhost:3000/reservations/${id}`, {
+    const res = await fetch(`/reservations/${id}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` }
     });

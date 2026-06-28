@@ -9,7 +9,7 @@ if (!token || !expiry || Date.now() > parseInt(expiry)) {
 
 async function loadQRCodes() {
   try {
-    const res = await fetch("http://localhost:3000/rewards/active-qr", {
+    const res = await fetch("/api/rewards/active-qr", {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();

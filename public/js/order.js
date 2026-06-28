@@ -109,7 +109,7 @@ async function placeOrder() {
     const earnPts = Math.round(subtotal * 10);
 
     try {
-        const res = await fetch("http://localhost:3000/rewards/earn", {
+        const res = await fetch("/api/rewards/earn", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
