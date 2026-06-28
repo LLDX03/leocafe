@@ -4,6 +4,7 @@ A full stack cafe management web application built as a side project to refresh 
 
 The system simulates a real cafe platform where users can browse menus, place orders ahead of time, earn and redeem loyalty rewards, make table reservations, and manage their accounts securely.
 
+**Screenshots and video is provided in the bottom section**
 ---
 
 ## 🛠️ Tech Stack
