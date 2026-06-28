@@ -169,12 +169,3 @@ The system simulates a real cafe platform where users can browse menus, place or
 Always wanted to open a café someday 
 
 ---
-
-## 📚 References
-
-- [Claude](https://claude.ai/) — UI/UX design & code assistance
-- [ChatGPT](https://chatgpt.com/) — troubleshooting
-- [W3Schools](https://www.w3schools.com/) — reference
-- [node-postgres](https://node-postgres.com/) — PostgreSQL client docs
-- [SendGrid Docs](https://docs.sendgrid.com/) — email integration
-- [Tabler Icons](https://tabler.io/icons) — icon set
