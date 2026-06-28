@@ -36,7 +36,7 @@ async function sendCode() {
         return;
     }
     emailErr.style.display = 'none';
-    btn.textContent = 'Sendingâ€¦';
+    btn.textContent = 'Sending...';
     btn.disabled = true;
 
     try {

@@ -179,7 +179,7 @@ async function submitReservation() {
       document.getElementById('specialReq').value = '';
       document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
 
-      showToast('â˜• Table reserved for ' + selectedGuests + ' on ' + date + ' at ' + selectedSlot);
+      showToast('Table reserved for ' + selectedGuests + ' on ' + date + ' at ' + selectedSlot);
       selectedSlot = null;
 
       loadReservations();

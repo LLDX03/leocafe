@@ -70,7 +70,7 @@ function updatePts() {
     // Gold â€” max tier
     document.getElementById('progressFill').style.width = '100%';
     document.getElementById('progressPct').textContent = 'Max';
-    document.querySelector('.progress-label span').textContent = 'Gold tier â€” maximum tier reached';
+    document.querySelector('.progress-label span').textContent = 'Gold tier — maximum tier reached';
   }
 }
 
@@ -148,7 +148,7 @@ function redeem(btn, baseCost, name) {
       btn.disabled = true;
 
       addHistoryItem(name, data.finalCost);
-      showToast('â˜• ' + name + ' redeemed! Show QR at the counter.');
+      showToast(name + ' redeemed! Show QR at the counter.');
 
       // Open QR page after short delay
       setTimeout(() => { window.location.href = '/qrpage'; }, 1500);
@@ -181,10 +181,10 @@ async function loadHistory() {
       item.innerHTML = `
         <div class="history-icon redeem"><i class="ti ti-award"></i></div>
         <div class="history-info">
-          <div class="history-name">Redeemed â€” ${h.reward_name}</div>
+          <div class="history-name">Redeemed —${h.reward_name}</div>
           <div class="history-date">${date}</div>
         </div>
-        <div class="history-pts redeem">âˆ’${h.points_deducted} pts</div>
+        <div class="history-pts redeem">-${h.points_deducted} pts</div>
       `;
       list.appendChild(item);
     });
@@ -203,10 +203,10 @@ function addHistoryItem(name, cost) {
   item.innerHTML = `
     <div class="history-icon redeem"><i class="ti ti-award"></i></div>
     <div class="history-info">
-      <div class="history-name">Redeemed â€” ${name}</div>
+      <div class="history-name">Redeemed —${name}</div>
       <div class="history-date">${today}</div>
     </div>
-    <div class="history-pts redeem">âˆ’${cost} pts</div>
+    <div class="history-pts redeem">-${cost} pts</div>
   `;
   list.prepend(item);
 }
