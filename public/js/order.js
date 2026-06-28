@@ -1,4 +1,4 @@
-// Tab switching
+﻿// Tab switching
 function switchTab(btn, id) {
     document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -59,7 +59,7 @@ function renderCart() {
         subtotal += it.price * it.qty;
         const el = document.createElement('div');
         el.className = 'cart-item';
-        el.innerHTML = `<div><div class="cart-item-name">${it.qty}× ${it.name}</div><div class="cart-item-detail">$${it.price.toFixed(2)} each</div></div><div class="cart-item-right"><div class="cart-item-price">$${(it.price * it.qty).toFixed(2)}</div><button class="cart-item-remove" onclick="removeItem('${it.name}')"><i class="ti ti-x"></i></button></div>`;
+        el.innerHTML = `<div><div class="cart-item-name">${it.qty}Ã— ${it.name}</div><div class="cart-item-detail">$${it.price.toFixed(2)} each</div></div><div class="cart-item-right"><div class="cart-item-price">$${(it.price * it.qty).toFixed(2)}</div><button class="cart-item-remove" onclick="removeItem('${it.name}')"><i class="ti ti-x"></i></button></div>`;
         cartItemsEl.appendChild(el);
     });
 
@@ -76,7 +76,7 @@ function renderCart() {
         const now = new Date();
         [10, 20, 30, 45].forEach((mins, i) => {
             const t = new Date(now.getTime() + mins * 60000);
-            const label = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + (mins === 10 ? ' · Soonest' : '');
+            const label = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + (mins === 10 ? ' Â· Soonest' : '');
             const btn2 = document.createElement('button');
             btn2.className = 'time-opt' + (i === 0 ? ' active' : '');
             btn2.textContent = label;
@@ -130,7 +130,7 @@ async function placeOrder() {
 
     const ref = '#LC-' + Math.floor(1000 + Math.random() * 9000);
     const timeBtn = document.querySelector('.time-opt.active');
-    const pickupTime = timeBtn ? timeBtn.textContent.split(' ·')[0] : 'soon';
+    const pickupTime = timeBtn ? timeBtn.textContent.split(' Â·')[0] : 'soon';
     document.getElementById('orderRef').textContent = ref;
     document.getElementById('orderMsg').textContent = 'Ready for pickup at ' + pickupTime + '. Show this reference at the counter.';
     document.getElementById('successOverlay').classList.add('show');

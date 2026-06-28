@@ -1,11 +1,11 @@
-const tabs = document.querySelectorAll('.tab-btn');
+﻿const tabs = document.querySelectorAll('.tab-btn');
 const token = localStorage.getItem("token");
 const expiry = localStorage.getItem("token_expiry");
 
 if (!token || !expiry || Date.now() > expiry) {
   localStorage.removeItem("token");
   localStorage.removeItem("token_expiry");
-  window.location.replace("/views/login.html");
+  window.location.replace("/login");
 }
 
 
@@ -30,7 +30,7 @@ fetch("http://localhost:3000/auth/me", {
   .then(res => res.json())
   .then(data => {
     if (!data.success) {
-      window.location.href = "/views/login.html";
+      window.location.href = "/login";
       return;
     }
     const user = data.user;
@@ -60,6 +60,6 @@ function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("token_expiry");
     localStorage.removeItem("leos_username");
-    window.location.href = 'login.html';
+    window.location.href = '/login';
   }
 }

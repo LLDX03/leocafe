@@ -1,4 +1,4 @@
-let emailUsed = '';
+﻿let emailUsed = '';
 
 const eyeOpen = `<path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5Z"/><circle cx="8" cy="8" r="2"/>`;
 const eyeClosed = `<line x1="2" y1="2" x2="14" y2="14"/><path d="M6.7 6.7A3 3 0 0 0 5.3 8s1.2 3 2.7 3c.6 0 1.1-.2 1.5-.5"/><path d="M9.3 9.3c.3-.4.5-.8.5-1.3C9.8 6.4 9 5.5 8 5.5c-.5 0-.9.2-1.3.4"/>`;
@@ -36,7 +36,7 @@ async function sendCode() {
         return;
     }
     emailErr.style.display = 'none';
-    btn.textContent = 'Sending…';
+    btn.textContent = 'Sendingâ€¦';
     btn.disabled = true;
 
     try {

@@ -1,4 +1,4 @@
-// Global state
+﻿// Global state
 let currentUser = null;
 let newEmailPending = null;
 let currentPasswordValid = false;
@@ -13,7 +13,7 @@ async function loadUserProfile() {
   const token = localStorage.getItem("token");
   
   if (!token) {
-    window.location.href = 'login.html';
+    window.location.href = '/login';
     return;
   }
 
@@ -28,7 +28,7 @@ async function loadUserProfile() {
 
     if (!data.success) {
       localStorage.removeItem("token");
-      window.location.href = 'login.html';
+      window.location.href = '/login';
       return;
     }
 
@@ -342,7 +342,7 @@ function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("token_expiry");
     localStorage.removeItem("leos_username");
-    window.location.href = 'login.html';
+    window.location.href = '/login';
   }
 }
 

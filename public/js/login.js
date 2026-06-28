@@ -1,4 +1,4 @@
-const form = document.getElementById('loginForm');
+﻿const form = document.getElementById('loginForm');
 const emailEl = document.getElementById('email');
 const pwEl = document.getElementById('password');
 const emailErr = document.getElementById('email-err');
@@ -71,7 +71,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
         const data = await res.json();
 
-        // ❌ ALWAYS HIDE FIRST
+        // âŒ ALWAYS HIDE FIRST
         document.getElementById("successMsg").style.display = "none";
 
         if (data.success) {
@@ -84,7 +84,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             localStorage.setItem("token", data.token);
             localStorage.setItem("token_expiry", expiry);
 
-            window.location.href = "/views/index.html";
+            window.location.href = "/index";
         }
 
         else {

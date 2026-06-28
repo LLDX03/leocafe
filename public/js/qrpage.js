@@ -1,10 +1,10 @@
-const token = localStorage.getItem("token");
+﻿const token = localStorage.getItem("token");
 const expiry = localStorage.getItem("token_expiry");
 
 if (!token || !expiry || Date.now() > parseInt(expiry)) {
   localStorage.removeItem("token");
   localStorage.removeItem("token_expiry");
-  window.location.replace("/views/login.html");
+  window.location.replace("/login");
 }
 
 async function loadQRCodes() {
@@ -56,7 +56,7 @@ function renderQRCard(code) {
     <div class="qr-card-header">
       <div>
         <div class="qr-reward-name">${code.reward_name}</div>
-        <div class="qr-meta">${code.points_deducted} pts · Expires in ${timeLeft}</div>
+        <div class="qr-meta">${code.points_deducted} pts Â· Expires in ${timeLeft}</div>
       </div>
       <div class="qr-ref">${code.redemption_id}</div>
     </div>

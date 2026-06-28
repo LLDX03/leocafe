@@ -10,8 +10,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "views", "index.html")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "views", "login.html")));
 app.get("/login", (req, res) => res.sendFile(path.join(__dirname, "views", "login.html")));
+app.get("/index", (req, res) => res.sendFile(path.join(__dirname, "views", "index.html")));
 app.get("/register", (req, res) => res.sendFile(path.join(__dirname, "views", "register.html")));
 app.get("/order", (req, res) => res.sendFile(path.join(__dirname, "views", "order.html")));
 app.get("/reserve", (req, res) => res.sendFile(path.join(__dirname, "views", "reserve.html")));

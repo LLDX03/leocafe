@@ -1,10 +1,10 @@
-const token = localStorage.getItem("token");
+﻿const token = localStorage.getItem("token");
 const expiry = localStorage.getItem("token_expiry");
 
 if (!token || !expiry || Date.now() > parseInt(expiry)) {
   localStorage.removeItem("token");
   localStorage.removeItem("token_expiry");
-  window.location.replace("/views/login.html");
+  window.location.replace("/login");
 }
 
 // Set min date to today
@@ -15,7 +15,7 @@ document.getElementById('resDate').value = today;
 let selectedGuests = 2;
 let selectedSlot = null;
 
-// ── Grey out past slots when today is selected ──
+// â”€â”€ Grey out past slots when today is selected â”€â”€
 function updateSlotAvailability() {
   const selectedDate = document.getElementById('resDate').value;
   const isToday = selectedDate === today;
@@ -48,7 +48,7 @@ function updateSlotAvailability() {
         btn.disabled = false;
       }
     } else {
-      // Future date — all slots available (except server-taken ones)
+      // Future date â€” all slots available (except server-taken ones)
       btn.classList.remove('full');
       btn.disabled = false;
     }
@@ -178,7 +178,7 @@ async function submitReservation() {
       document.getElementById('specialReq').value = '';
       document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
 
-      showToast('☕ Table reserved for ' + selectedGuests + ' on ' + date + ' at ' + selectedSlot);
+      showToast('â˜• Table reserved for ' + selectedGuests + ' on ' + date + ' at ' + selectedSlot);
       selectedSlot = null;
 
       loadReservations();
