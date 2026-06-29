@@ -180,6 +180,3 @@ The app is deployed on **Vercel** with **Neon** (serverless PostgreSQL).
 
 ---
 
-## Motivation
-
-Always wanted to open a café someday.
