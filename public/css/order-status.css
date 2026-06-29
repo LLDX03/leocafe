@@ -10,7 +10,22 @@ body {
   padding: 1.2rem 2rem;
   border-bottom: 1px solid #e0d8ce;
   background: #f5f0eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: #5a5248;
+  text-decoration: none;
+}
+
+.nav-back:hover { color: #2c3a2e; }
 
 .nav-brand {
   font-family: 'Cormorant Garamond', serif;
