@@ -93,7 +93,7 @@ function renderCart() {
         const now = new Date();
         [10, 20, 30, 45].forEach((mins, i) => {
             const t = new Date(now.getTime() + mins * 60000);
-            const label = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + (mins === 10 ? ' Â· Soonest' : '');
+            const label = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + (mins === 10 ? ' · Soonest' : '');
             const btn2 = document.createElement('button');
             btn2.className = 'time-opt' + (i === 0 ? ' active' : '');
             btn2.textContent = label;
