@@ -6,7 +6,7 @@
 <title>Leo's Cafe — Order Ahead</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/order.css?v=3">
+<link rel="stylesheet" href="/css/order.css?v=4">
 
 </head>
 <body>
@@ -230,12 +230,16 @@
   </div>
 
   <!-- CART COLUMN -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
   <div class="cart-col" id="cartCol">
     <div class="cart-handle" id="cartHandle">
-      <div class="cart-handle-bar"></div>
+      <button class="cart-close-btn" id="cartCloseBtn"><i class="ti ti-x"></i></button>
       <div class="cart-handle-summary">
         <span class="cart-handle-label"><i class="ti ti-shopping-bag"></i> <span id="cartHandleCount">Your Order</span></span>
-        <span class="cart-handle-total" id="cartHandleTotal"></span>
+        <div class="cart-handle-right">
+          <span class="cart-handle-total" id="cartHandleTotal"></span>
+          <span class="cart-handle-cta" id="cartHandleCta">View Order</span>
+        </div>
       </div>
     </div>
     <div class="cart-title">Your Order</div>

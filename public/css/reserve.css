@@ -489,6 +489,8 @@ textarea::placeholder {
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         padding-bottom: 2px;
+        -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+        mask-image: linear-gradient(to right, black 80%, transparent 100%);
     }
 
     .nav-links::-webkit-scrollbar { display: none; }

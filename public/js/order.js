@@ -187,6 +187,23 @@ function showToast(msg) {
 }
 
 // Mobile cart toggle
-document.getElementById('cartHandle').addEventListener('click', () => {
-    document.getElementById('cartCol').classList.toggle('open');
+function openCart() {
+    document.getElementById('cartCol').classList.add('open');
+    document.getElementById('cartBackdrop').classList.add('show');
+    document.getElementById('cartHandleCta').textContent = '';
+}
+
+function closeCart() {
+    document.getElementById('cartCol').classList.remove('open');
+    document.getElementById('cartBackdrop').classList.remove('show');
+    document.getElementById('cartHandleCta').textContent = 'View Order';
+}
+
+document.getElementById('cartHandle').addEventListener('click', (e) => {
+    if (e.target.closest('#cartCloseBtn')) return;
+    const isOpen = document.getElementById('cartCol').classList.contains('open');
+    isOpen ? closeCart() : openCart();
 });
+
+document.getElementById('cartCloseBtn').addEventListener('click', closeCart);
+document.getElementById('cartBackdrop').addEventListener('click', closeCart);
