@@ -15,12 +15,18 @@
     padding: 0;
 }
 
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 .menu-wrap {
     background: var(--cream);
     min-height: 100vh;
     font-family: 'Jost', sans-serif;
     color: var(--charcoal);
     padding: 0 0 60px;
+    overflow-x: hidden;
 }
 
 .header {

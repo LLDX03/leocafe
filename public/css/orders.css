@@ -22,6 +22,8 @@ body {
   color: #2c3a2e;
   text-decoration: none;
   letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-links { display: flex; gap: 0.5rem; }

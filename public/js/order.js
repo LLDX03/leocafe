@@ -47,10 +47,6 @@ function changeQty(btn, delta) {
         delete cart[cartKey];
     } else {
         cart[cartKey] = { cartKey, name: displayName, price, qty };
-        // Auto-open cart on mobile when first item added
-        if (Object.keys(cart).length === 1 && window.innerWidth <= 768) {
-            document.getElementById('cartCol').classList.add('open');
-        }
     }
     renderCart();
 }
