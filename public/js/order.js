@@ -21,7 +21,11 @@ function changeQty(btn, delta) {
     const numEl = ctrl.querySelector('.qty-num');
     const item = btn.closest('.order-item');
     const name = item.dataset.name;
-    const price = parseFloat(item.dataset.price);
+    const basePrice = parseFloat(item.dataset.price);
+    const activeMilk = item.querySelector('.milk-btn.active');
+    const milkMatch = activeMilk ? activeMilk.textContent.match(/\+\$(\d+(\.\d+)?)/) : null;
+    const milkExtra = milkMatch ? parseFloat(milkMatch[1]) : 0;
+    const price = basePrice + milkExtra;
     let qty = parseInt(numEl.textContent) + delta;
     if (qty < 0) qty = 0;
     numEl.textContent = qty;
