@@ -44,6 +44,18 @@ CREATE TABLE IF NOT EXISTS email_verification (
     created_at TIMESTAMP    DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS orders (
+    id           SERIAL PRIMARY KEY,
+    user_id      INTEGER      NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    order_number VARCHAR(20)  NOT NULL,
+    items        JSONB        NOT NULL,
+    total        NUMERIC(8,2) NOT NULL,
+    status       VARCHAR(20)  DEFAULT 'preparing',
+    pickup_time  VARCHAR(20),
+    ready_at     TIMESTAMP,
+    created_at   TIMESTAMP    DEFAULT NOW()
+);
+
 -- INDEXES
 CREATE INDEX IF NOT EXISTS idx_users_email                ON users(email);
 CREATE INDEX IF NOT EXISTS idx_email_verification_user_id ON email_verification(user_id);
