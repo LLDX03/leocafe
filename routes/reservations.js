@@ -6,11 +6,11 @@ const authMiddleware = require("../middleware/auth");
 router.get("/", authMiddleware, async (req, res) => {
     try {
         const result = await pool.query(
-            `SELECT id, date, time, guests, special_requests, status, created_at 
-             FROM reservations 
-             WHERE user_id = $1 
+            `SELECT id, date, time, guests, special_requests, status, created_at
+             FROM reservations
+             WHERE user_id = $1
              AND status = 'confirmed'
-             AND (date > CURRENT_DATE OR (date = CURRENT_DATE AND time > TO_CHAR(NOW(), 'HH12:MI AM')))
+             AND (date + time::time) > (NOW() AT TIME ZONE 'Asia/Singapore')
              ORDER BY date ASC`,
             [req.user.id]
         );
