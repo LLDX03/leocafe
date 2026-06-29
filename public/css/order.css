@@ -631,4 +631,32 @@ body {
     .cart-sub {
         display: none;
     }
+
+    .top-nav {
+        padding: 10px 16px;
+    }
+
+    .nav-links {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+        gap: 4px;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-pill {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.7rem;
+        white-space: nowrap;
+    }
+
+    .menu-col {
+        padding: 20px 16px 280px;
+    }
+
+    .slot-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

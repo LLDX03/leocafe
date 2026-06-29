@@ -476,6 +476,28 @@ textarea::placeholder {
     transform: translateX(-50%) translateY(0);
 }
 
+@media(max-width:768px) {
+    .top-nav {
+        padding: 10px 16px;
+    }
+
+    .nav-links {
+        gap: 4px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-pill {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.7rem;
+        white-space: nowrap;
+    }
+}
+
 @media(max-width:600px) {
     .form-grid {
         grid-template-columns: 1fr;
@@ -486,14 +508,24 @@ textarea::placeholder {
     }
 
     .slots-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .guest-grid {
+        gap: 6px;
+    }
+
+    .guest-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.85rem;
     }
 
     .page {
-        padding: 32px 20px 60px;
+        padding: 24px 16px 60px;
     }
 
     .form-card {
-        padding: 24px 20px;
+        padding: 20px 16px;
     }
 }

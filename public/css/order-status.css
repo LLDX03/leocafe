@@ -186,3 +186,25 @@ body {
   text-decoration: none;
   text-transform: uppercase;
 }
+
+@media (max-width: 600px) {
+  .nav {
+    padding: 1rem 1.2rem;
+  }
+
+  .status-wrap {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .order-card {
+    padding: 2rem 1.4rem;
+  }
+
+  .order-num {
+    font-size: 2rem;
+  }
+
+  .status-title {
+    font-size: 1.3rem;
+  }
+}

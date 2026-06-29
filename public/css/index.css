@@ -352,17 +352,52 @@
     background: rgba(200, 219, 203, 0.2);
 }
 
+@media (max-width: 768px) {
+    .strip-right {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+        flex-shrink: 0;
+    }
+
+    .strip-right::-webkit-scrollbar { display: none; }
+
+    .strip-pill {
+        white-space: nowrap;
+        font-size: 0.72rem;
+        padding: 5px 10px;
+    }
+}
+
 @media (max-width: 600px) {
     .member-strip {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-        padding: 10px 20px;
+        padding: 10px 16px;
     }
 
-    .strip-right {
-        flex-wrap: wrap;
+    .header {
+        padding: 32px 16px 24px;
     }
+
+    .cafe-name {
+        font-size: 36px;
+    }
+
+    .menu-section {
+        padding: 24px 16px;
+    }
+
+    .tab-nav {
+        overflow-x: auto;
+        scrollbar-width: none;
+        justify-content: flex-start;
+        padding: 0 16px;
+    }
+
+    .tab-nav::-webkit-scrollbar { display: none; }
 }
 
 

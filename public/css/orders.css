@@ -154,3 +154,39 @@ body {
 
 .empty-state i { font-size: 2.5rem; }
 .empty-state p { font-size: 0.9rem; }
+
+@media (max-width: 768px) {
+    .nav {
+        padding: 10px 16px;
+    }
+
+    .nav-links {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+        gap: 4px;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-pill {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.7rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .orders-wrap {
+        padding: 2rem 1rem 4rem;
+    }
+
+    .page-title {
+        font-size: 1.6rem;
+    }
+
+    .order-card {
+        padding: 1.2rem;
+    }
+}

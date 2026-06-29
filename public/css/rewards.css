@@ -462,6 +462,41 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
+@media(max-width:768px) {
+    .top-nav {
+        padding: 10px 16px;
+    }
+
+    .nav-links {
+        gap: 4px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+        flex-shrink: 0;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-pill {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.7rem;
+        white-space: nowrap;
+    }
+
+    .section-head {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .btn-active-qr {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
 @media(max-width:600px) {
     .points-card {
         flex-direction: column;
@@ -476,6 +511,14 @@ body {
 
     .rewards-grid {
         grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 24px 16px;
+    }
+
+    .section-wrap {
+        padding: 0 16px 60px;
     }
 }
 
