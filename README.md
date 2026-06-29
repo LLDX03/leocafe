@@ -2,7 +2,15 @@
 
 A full-stack cafe management web application built as a personal project to strengthen software development skills after NS. The platform simulates a real cafe experience — users can browse the menu, place orders ahead of time, track order status, earn and redeem loyalty rewards, make table reservations, and manage their accounts securely.
 
-**Live Demo: [leocafe.vercel.app](https://leocafe.vercel.app)**
+---
+
+## Live Demo
+
+https://leocafe.vercel.app
+
+Demo Account
+Email: Test@gmail.com
+Password: Test12345!
 
 ---
 
