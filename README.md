@@ -79,6 +79,34 @@ Password: Test12345!
 
 ---
 
+## Architecture
+
+A Multi-Page Application (MPA) where each page is a separate HTML file served by Express, with its own JavaScript file that communicates with the REST API via `fetch()`. No frontend framework — vanilla JS throughout.
+
+```
+Browser
+├── views/          HTML pages served by Express
+└── public/js       Per-page scripts calling the API via fetch()
+
+Vercel
+├── Static assets (CSS/JS) → served from edge CDN
+└── Page & API requests    → routed to Express serverless function
+
+Express (server.js)
+├── auth.js middleware     JWT verification on protected routes
+├── routes/auth.js         Register, login, forgot password
+├── routes/orders.js       Order creation and status
+├── routes/reservations.js Booking management
+├── routes/rewards.js      Points, tiers, redemptions
+└── routes/profile.js      Account management
+
+External Services
+├── Neon PostgreSQL         users, orders, reservations, redemptions
+└── SendGrid                Transactional email (verification codes)
+```
+
+---
+
 ## Security
 
 - Passwords hashed with bcrypt (10 salt rounds)
