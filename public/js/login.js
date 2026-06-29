@@ -66,7 +66,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         const res = await fetch("/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password, remember: document.getElementById("remember").checked })
         });
 
         const data = await res.json();

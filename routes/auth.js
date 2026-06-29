@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, remember } = req.body;
     try {
         console.log("LOGIN ATTEMPT:", email);
         const result = await pool.query(
@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
         const token = jwt.sign(
             { id: user.id },
             process.env.JWT_SECRET,
-            { expiresIn: "1h" }
+            { expiresIn: remember ? "30d" : "1h" }
         );
         return res.json({ success: true, token });
     } catch (err) {
