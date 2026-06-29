@@ -6,11 +6,25 @@ function switchTab(btn, id) {
     document.getElementById('sec-' + id).classList.add('visible');
 }
 
-// Milk selection per item
+// Milk selection per item — reset qty when milk changes
 function selectMilk(btn) {
     const row = btn.closest('.milk-row');
+    const item = btn.closest('.order-item');
+    const prevActive = row.querySelector('.milk-btn.active');
+    if (prevActive === btn) return;
+
+    // Remove old cart entry for this item's previous milk
+    const oldMilkLabel = prevActive ? prevActive.textContent.trim() : '';
+    const oldKey = item.dataset.name + '|' + oldMilkLabel;
+    delete cart[oldKey];
+
+    // Reset qty counter
+    const numEl = item.querySelector('.qty-num');
+    if (numEl) numEl.textContent = '0';
+
     row.querySelectorAll('.milk-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+    renderCart();
 }
 
 // Cart state
@@ -23,17 +37,21 @@ function changeQty(btn, delta) {
     const name = item.dataset.name;
     const basePrice = parseFloat(item.dataset.price);
     const activeMilk = item.querySelector('.milk-btn.active');
+    const milkLabel = activeMilk ? activeMilk.textContent.trim() : 'Whole';
     const milkMatch = activeMilk ? activeMilk.textContent.match(/\+\$(\d+(\.\d+)?)/) : null;
     const milkExtra = milkMatch ? parseFloat(milkMatch[1]) : 0;
     const price = basePrice + milkExtra;
+    const cartKey = name + '|' + milkLabel;
+    const displayName = milkExtra > 0 ? `${name} (${milkLabel.split(' ')[0]})` : name;
+
     let qty = parseInt(numEl.textContent) + delta;
     if (qty < 0) qty = 0;
     numEl.textContent = qty;
 
     if (qty === 0) {
-        delete cart[name];
+        delete cart[cartKey];
     } else {
-        cart[name] = { name, price, qty };
+        cart[cartKey] = { name: displayName, price, qty };
     }
     renderCart();
 }
