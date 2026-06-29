@@ -3,6 +3,26 @@ const router = express.Router();
 const pool = require("../db/db");
 const authMiddleware = require("../middleware/auth");
 
+router.get("/", authMiddleware, async (req, res) => {
+    try {
+        const result = await pool.query(
+            `SELECT id, order_number, items, total, status, pickup_time, created_at
+             FROM orders WHERE user_id = $1 ORDER BY created_at DESC LIMIT 20`,
+            [req.user.id]
+        );
+        const orders = result.rows.map(o => {
+            if (o.status === "preparing" && new Date() >= new Date(o.ready_at)) {
+                o.status = "ready";
+            }
+            return o;
+        });
+        res.json({ success: true, orders });
+    } catch (err) {
+        console.error(err);
+        res.json({ success: false, message: "Server error" });
+    }
+});
+
 router.post("/", authMiddleware, async (req, res) => {
     const { items, total, pickupTime } = req.body;
     if (!items || !items.length) return res.json({ success: false, message: "No items" });

@@ -128,7 +128,7 @@ async function placeOrder() {
     const subtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
     const earnPts = Math.round(subtotal * 10);
     const timeBtn = document.querySelector('.time-opt.active');
-    const pickupTime = timeBtn ? timeBtn.textContent.split(' ·')[0].trim() : 'soon';
+    const pickupTime = timeBtn ? timeBtn.textContent.split('·')[0].trim() : 'soon';
 
     const btn = document.getElementById('btnPlace');
     btn.disabled = true;

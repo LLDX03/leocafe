@@ -23,6 +23,7 @@ app.get("/profile", (req, res) => res.sendFile(path.join(__dirname, "views", "pr
 app.get("/qrpage", (req, res) => res.sendFile(path.join(__dirname, "views", "qrpage.html")));
 app.get("/forgotpassword", (req, res) => res.sendFile(path.join(__dirname, "views", "forgotpassword.html")));
 app.get("/order-status", (req, res) => res.sendFile(path.join(__dirname, "views", "order-status.html")));
+app.get("/orders-history", (req, res) => res.sendFile(path.join(__dirname, "views", "orders.html")));
 
 // API routes
 app.use("/auth", require("./routes/auth"));

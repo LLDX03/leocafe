@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo's Cafe — My Orders</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/orders.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-brand" href="/index">Leo's Cafe</a>
+    <div class="nav-links">
+      <a class="nav-pill" href="/rewards"><i class="ti ti-award"></i> Rewards</a>
+      <a class="nav-pill" href="/reserve"><i class="ti ti-calendar"></i> Reserve</a>
+      <a class="nav-pill active" href="/order"><i class="ti ti-shopping-bag"></i> Order Ahead</a>
+      <a class="nav-pill" href="/index"><i class="ti ti-menu-2"></i> Menu</a>
+    </div>
+  </nav>
+
+  <div class="orders-wrap">
+    <div class="page-header">
+      <h1 class="page-title">My Orders</h1>
+      <a href="/order" class="btn-new">+ New Order</a>
+    </div>
+
+    <div id="ordersList"></div>
+    <div id="emptyState" class="empty-state" style="display:none">
+      <i class="ti ti-coffee-off"></i>
+      <p>No orders yet</p>
+      <a href="/order" class="btn-new">Place your first order</a>
+    </div>
+  </div>
+
+  <script src="/js/orders.js"></script>
+</body>
+</html>
