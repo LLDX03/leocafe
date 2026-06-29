@@ -127,33 +127,38 @@ async function placeOrder() {
     const token = localStorage.getItem("token");
     const subtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
     const earnPts = Math.round(subtotal * 10);
+    const timeBtn = document.querySelector('.time-opt.active');
+    const pickupTime = timeBtn ? timeBtn.textContent.split(' ·')[0].trim() : 'soon';
+
+    const btn = document.getElementById('btnPlace');
+    btn.disabled = true;
+    btn.textContent = 'Placing order...';
 
     try {
-        const res = await fetch("/api/rewards/earn", {
+        // Save points
+        await fetch("/api/rewards/earn", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
             body: JSON.stringify({ pointsEarned: earnPts })
         });
 
+        // Save order
+        const res = await fetch("/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+            body: JSON.stringify({ items, total: subtotal, pickupTime })
+        });
+
         const data = await res.json();
-        if (!data.success) {
-            showToast("Error saving points");
-            return;
-        }
+        if (!data.success) { showToast("Error placing order"); btn.disabled = false; btn.textContent = 'Place Order'; return; }
+
+        window.location.href = "/order-status?id=" + data.orderId;
+
     } catch (err) {
         showToast("Server error");
-        return;
+        btn.disabled = false;
+        btn.textContent = 'Place Order';
     }
-
-    const ref = '#LC-' + Math.floor(1000 + Math.random() * 9000);
-    const timeBtn = document.querySelector('.time-opt.active');
-    const pickupTime = timeBtn ? timeBtn.textContent.split(' Â·')[0] : 'soon';
-    document.getElementById('orderRef').textContent = ref;
-    document.getElementById('orderMsg').textContent = 'Ready for pickup at ' + pickupTime + '. Show this reference at the counter.';
-    document.getElementById('successOverlay').classList.add('show');
 }
 
 function resetOrder() {

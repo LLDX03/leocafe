@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo's Cafe — Your Order</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/order-status.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-brand" href="/index">Leo's Cafe</a>
+  </nav>
+
+  <div class="status-wrap">
+
+    <div class="order-card" id="statusCard">
+
+      <div class="order-num-label">ORDER</div>
+      <div class="order-num" id="orderNum">—</div>
+
+      <div class="status-icon-wrap" id="statusIconWrap">
+        <div class="brew-ring"></div>
+        <i class="ti ti-coffee status-icon" id="statusIcon"></i>
+      </div>
+
+      <div class="status-title" id="statusTitle">We're preparing your order</div>
+      <div class="status-sub" id="statusSub">Sit tight — this usually takes just a few minutes.</div>
+
+      <div class="pickup-row" id="pickupRow">
+        <i class="ti ti-clock"></i>
+        <span id="pickupLabel">Estimated pickup: —</span>
+      </div>
+
+      <div class="items-list" id="itemsList"></div>
+
+      <div class="total-row">
+        <span>Total</span>
+        <span id="orderTotal">—</span>
+      </div>
+
+    </div>
+
+    <a href="/order" class="btn-new-order" id="btnNewOrder" style="display:none">Place another order</a>
+
+  </div>
+
+  <script src="/js/order-status.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #f5f0eb;
+  font-family: 'Jost', sans-serif;
+  min-height: 100vh;
+}
+
+.nav {
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid #e0d8ce;
+  background: #f5f0eb;
+}
+
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #2c3a2e;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.status-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1rem 4rem;
+  gap: 1.2rem;
+}
+
+.order-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+.order-num-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: #9a8c7e;
+  font-weight: 500;
+}
+
+.order-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 500;
+  color: #2c3a2e;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.2rem;
+}
+
+/* Animated brew ring */
+.status-icon-wrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.brew-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid #e0d8ce;
+  border-top-color: #2c3a2e;
+  animation: spin 1.2s linear infinite;
+}
+
+.status-icon-wrap.ready .brew-ring {
+  animation: none;
+  border-color: #2c3a2e;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.status-icon {
+  font-size: 2rem;
+  color: #2c3a2e;
+}
+
+.status-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #2c3a2e;
+  text-align: center;
+  margin-top: 0.3rem;
+}
+
+.status-sub {
+  font-size: 0.82rem;
+  color: #9a8c7e;
+  text-align: center;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+
+/* Ready state */
+.order-card.ready .status-title { color: #2c3a2e; }
+.order-card.ready .brew-ring {
+  animation: none;
+  border-color: #2c3a2e;
+}
+
+.pickup-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #7a6e64;
+  background: #f5f0eb;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  margin: 0.4rem 0 1.2rem;
+}
+
+.items-list {
+  width: 100%;
+  border-top: 1px solid #f0ebe4;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.order-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #4a4035;
+}
+
+.order-line .qty { color: #9a8c7e; margin-right: 0.3rem; }
+
+.total-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2c3a2e;
+  border-top: 1px solid #f0ebe4;
+  padding-top: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.btn-new-order {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: #2c3a2e;
+  color: #f5f0eb;
+  border-radius: 50px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}

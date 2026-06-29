@@ -22,12 +22,14 @@ app.get("/rewards", (req, res) => res.sendFile(path.join(__dirname, "views", "re
 app.get("/profile", (req, res) => res.sendFile(path.join(__dirname, "views", "profile.html")));
 app.get("/qrpage", (req, res) => res.sendFile(path.join(__dirname, "views", "qrpage.html")));
 app.get("/forgotpassword", (req, res) => res.sendFile(path.join(__dirname, "views", "forgotpassword.html")));
+app.get("/order-status", (req, res) => res.sendFile(path.join(__dirname, "views", "order-status.html")));
 
 // API routes
 app.use("/auth", require("./routes/auth"));
 app.use("/reservations", require("./routes/reservations"));
 app.use("/api/rewards", require("./routes/rewards"));
 app.use("/api/profile", require("./routes/profile"));
+app.use("/orders", require("./routes/orders"));
 
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
