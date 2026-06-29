@@ -509,6 +509,8 @@ body {
   .nav-links {
     gap: 4px;
     overflow-x: auto;
+        flex: 1;
+        min-width: 0;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 2px;
