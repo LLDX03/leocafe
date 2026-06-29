@@ -6,25 +6,20 @@ function switchTab(btn, id) {
     document.getElementById('sec-' + id).classList.add('visible');
 }
 
-// Milk selection per item — reset qty when milk changes
+// Milk selection per item — switch counter to show that variant's qty
 function selectMilk(btn) {
     const row = btn.closest('.milk-row');
     const item = btn.closest('.order-item');
-    const prevActive = row.querySelector('.milk-btn.active');
-    if (prevActive === btn) return;
-
-    // Remove old cart entry for this item's previous milk
-    const oldMilkLabel = prevActive ? prevActive.textContent.trim() : '';
-    const oldKey = item.dataset.name + '|' + oldMilkLabel;
-    delete cart[oldKey];
-
-    // Reset qty counter
-    const numEl = item.querySelector('.qty-num');
-    if (numEl) numEl.textContent = '0';
+    if (row.querySelector('.milk-btn.active') === btn) return;
 
     row.querySelectorAll('.milk-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    renderCart();
+
+    // Show the qty already in cart for this variant
+    const milkLabel = btn.textContent.trim();
+    const cartKey = item.dataset.name + '|' + milkLabel;
+    const numEl = item.querySelector('.qty-num');
+    if (numEl) numEl.textContent = cart[cartKey] ? cart[cartKey].qty : '0';
 }
 
 // Cart state
@@ -51,7 +46,7 @@ function changeQty(btn, delta) {
     if (qty === 0) {
         delete cart[cartKey];
     } else {
-        cart[cartKey] = { name: displayName, price, qty };
+        cart[cartKey] = { cartKey, name: displayName, price, qty };
     }
     renderCart();
 }
@@ -81,7 +76,7 @@ function renderCart() {
         subtotal += it.price * it.qty;
         const el = document.createElement('div');
         el.className = 'cart-item';
-        el.innerHTML = `<div><div class="cart-item-name">${it.qty}Ã— ${it.name}</div><div class="cart-item-detail">$${it.price.toFixed(2)} each</div></div><div class="cart-item-right"><div class="cart-item-price">$${(it.price * it.qty).toFixed(2)}</div><button class="cart-item-remove" onclick="removeItem('${it.name}')"><i class="ti ti-x"></i></button></div>`;
+        el.innerHTML = `<div><div class="cart-item-name">${it.qty}x ${it.name}</div><div class="cart-item-detail">$${it.price.toFixed(2)} each</div></div><div class="cart-item-right"><div class="cart-item-price">$${(it.price * it.qty).toFixed(2)}</div><button class="cart-item-remove" onclick="removeItem('${it.cartKey}')"><i class="ti ti-x"></i></button></div>`;
         cartItemsEl.appendChild(el);
     });
 
@@ -111,14 +106,17 @@ function renderCart() {
     }
 }
 
-function removeItem(name) {
-    // reset qty in menu
+function removeItem(cartKey) {
+    const [itemName, milkLabel] = cartKey.split('|');
     document.querySelectorAll('.order-item').forEach(el => {
-        if (el.dataset.name === name) {
-            el.querySelector('.qty-num').textContent = '0';
+        if (el.dataset.name === itemName) {
+            const activeBtn = el.querySelector('.milk-btn.active');
+            if (activeBtn && activeBtn.textContent.trim() === milkLabel) {
+                el.querySelector('.qty-num').textContent = '0';
+            }
         }
     });
-    delete cart[name];
+    delete cart[cartKey];
     renderCart();
 }
 
