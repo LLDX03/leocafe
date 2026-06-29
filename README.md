@@ -1,157 +1,165 @@
-# ☕ Leo's Cafe
+# Leo's Cafe
 
-A full stack cafe management web application built as a side project to refresh and strengthen my software development skills after NS.
+A full-stack cafe management web application built as a personal project to strengthen software development skills after NS. The platform simulates a real cafe experience — users can browse the menu, place orders ahead of time, track order status, earn and redeem loyalty rewards, make table reservations, and manage their accounts securely.
 
-The system simulates a real cafe platform where users can browse menus, place orders ahead of time, earn and redeem loyalty rewards, make table reservations, and manage their accounts securely.
-
-**Screenshots and video is provided in the bottom section**
+**Live Demo: [leocafe.vercel.app](https://leocafe.vercel.app)**
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-### Frontend
-- HTML, CSS, JavaScript
-- Cormorant Garamond & Jost (Google Fonts)
-- Tabler Icons
-
-### Backend
-- Node.js + Express.js
-- RESTful API architecture
-
-### Database
-- PostgreSQL
-
-### Authentication & Security
-- JWT (JSON Web Tokens)
-- bcrypt password hashing
-- Input validation & protected routes
-
-### Services & Libraries
-- SendGrid — transactional email (verification codes)
-- dotenv — environment variable management
-- CORS — cross-origin request handling
-- qrcodejs — QR code generation for reward redemptions
+| Layer | Technologies |
+|---|---|
+| Frontend | HTML, CSS, Vanilla JavaScript |
+| Backend | Node.js, Express.js |
+| Database | PostgreSQL (Neon serverless) |
+| Auth | JWT, bcrypt |
+| Email | SendGrid |
+| Deployment | Vercel |
+| Fonts & Icons | Cormorant Garamond, Jost (Google Fonts), Tabler Icons |
 
 ---
 
-## ✨ Features
+## Features
 
-### 🔐 Authentication
-- User registration with strong password validation
+### Authentication
+- User registration with password strength validation
 - Login with JWT session management
-- Forgot password flow with email verification code
-- Configurable session duration (1 hour default, 24 hours with "Keep me signed in")
+- "Keep me signed in" — 30-day session vs 1-hour default
+- Forgot password flow with 6-digit email verification code
 
-### 🍽️ Menu
-- Tabbed menu browser across four categories: Espresso, Brewed Coffee, Tea & Botanicals, Cold & Signature
-- Seasonal and signature item badges
+### Menu
+- Tabbed browser across four categories: Espresso, Brewed Coffee, Tea & Botanicals, Cold & Signature
+- Seasonal and reserve item badges
 
-### 🛒 Order Ahead
+### Order Ahead
 - Add items to cart with quantity controls
-- Milk type selection per drink
-- Pickup time selection
+- Milk type selection per drink with upcharge reflected in total
+- Multiple variants of the same drink tracked separately in cart
+- Pickup time selection with 30-minute advance buffer
 - Points estimate shown before checkout
+- Order saved to database on placement
 
-### 🎁 Rewards & Loyalty
-- Earn points on every order (10 pts per dollar)
+### Order Status
+- Dedicated status page per order with order number
+- Animated "Preparing your order" state with live polling every 10 seconds
+- Automatically flips to "Ready for collection" at pickup time
+- Orders history page — view and revisit all past orders
+
+### Rewards & Loyalty
+- Earn 10 points per dollar spent
 - Redeem points for free drinks and discounts
-- Tiered membership system:
-  - 🥉 Bronze — default
-  - 🥈 Silver — 1,000 accumulative pts (5% off redemptions)
-  - 🥇 Gold — 5,000 accumulative pts (10% off redemptions)
+- Tiered membership:
+  - Bronze — default
+  - Silver — 1,000 cumulative pts (5% off redemptions)
+  - Gold — 5,000 cumulative pts (10% off redemptions)
 - QR code generated on redemption for counter verification
 - Active QR codes page with 24-hour expiry
 - Redemption history log
 
-### 👤 Profile
+### Table Reservations
+- Date picker, guest count (1–5+), and 30-minute time slots
+- Real-time slot availability — booked slots greyed out server-side
+- Past slots automatically disabled for same-day bookings
+- View and cancel upcoming reservations
+
+### Profile Management
 - Edit username and birthday
-- Change email with 6-digit verification code (sent to current email)
+- Change email with 6-digit verification code sent to current email
 - Change password with current password confirmation + verification code
 - View loyalty points, tier, and member since date
 
-### 📅 Reservations
-- Pick date, guest count (1–6+), and time slot
-- Real-time slot availability — taken slots are greyed out
-- Past time slots automatically disabled when booking for today
-- View and cancel upcoming reservations
+---
+
+## Security
+
+- Passwords hashed with bcrypt (10 salt rounds)
+- JWT on all protected API routes
+- Email verification codes for sensitive changes (email, password, forgot password)
+- Verification codes expire after 15 minutes, single-use enforced in DB
+- Environment variables never committed — managed via `.env` / Vercel dashboard
 
 ---
 
-## 🔐 Security
-- Passwords hashed with bcrypt (10 rounds)
-- JWT authentication on all protected routes
-- Email verification codes for sensitive account changes (email, password, forgot password)
-- Codes stored in DB with 15-minute expiry and single-use enforcement
-- Environment variables via dotenv (never committed)
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── db/
-│   ├── db.js               # PostgreSQL connection pool
-│   └── setup.sql           # Table definitions
+│   ├── db.js               # PostgreSQL connection pool (supports DATABASE_URL for production)
+│   └── setup.sql           # All table definitions
 ├── middleware/
 │   └── auth.js             # JWT verification middleware
 ├── routes/
 │   ├── auth.js             # Register, login, /me, forgot password
-│   ├── profile.js          # Profile CRUD + email/password change
+│   ├── orders.js           # Order creation and status
+│   ├── profile.js          # Profile CRUD + email/password change flows
 │   ├── reservations.js     # Booking CRUD + slot availability
 │   └── rewards.js          # Points, tiers, redemptions, QR codes
 ├── public/
 │   ├── css/                # Per-page stylesheets
 │   └── js/                 # Per-page frontend scripts
-├── views/                  # HTML pages
+├── views/                  # Server-rendered HTML pages
+├── vercel.json             # Vercel deployment config
 ├── server.js               # Express app entry point
-└── .env                    # Environment variables (not committed)
+└── .env.example            # Environment variable template
 ```
 
 ---
 
-## ⚙️ Setup
+## Local Setup
 
 1. Clone the repo and install dependencies:
    ```bash
+   git clone https://github.com/LLDX03/leocafe.git
+   cd leocafe
    npm install
    ```
 
 2. Copy `.env.example` to `.env` and fill in your values:
    ```
-   JWT_SECRET=your_jwt_secret_here
+   JWT_SECRET=your_jwt_secret
 
-   DB_USER=your_database_user
-   DB_HOST=your_database_host
-   DB_NAME=your_database_name
-   DB_PASSWORD=your_database_password
+   DB_USER=your_db_user
+   DB_HOST=your_db_host
+   DB_NAME=your_db_name
+   DB_PASSWORD=your_db_password
    DB_PORT=5432
 
-   SENDGRID_API_KEY=your_sendgrid_api_key_here
-   SENDGRID_FROM_EMAIL=your_email@example.com
+   SENDGRID_API_KEY=your_sendgrid_key
+   SENDGRID_FROM_EMAIL=your_sender_email
    ```
 
-3. Run the SQL setup to create tables:
+3. Create the database tables:
    ```bash
    psql -U <user> -d <database> -f db/setup.sql
    ```
 
 4. Start the server:
    ```bash
-   node server.js
+   npm start
    ```
 
-5. Open `views/login.html` in your browser or serve via a local server.
+5. Visit `http://localhost:3000`
 
 ---
 
-## 📸 Screenshots
+## Deployment
+
+The app is deployed on **Vercel** with **Neon** (serverless PostgreSQL).
+
+- Push to `main` triggers an automatic Vercel deployment
+- Set the following environment variables in the Vercel dashboard:
+  - `DATABASE_URL` — Neon connection string
+  - `JWT_SECRET`
+  - `SENDGRID_API_KEY`
+  - `SENDGRID_FROM_EMAIL`
+
+---
+
+## Screenshots
 
 **Login**
 ![Login](docs/login.png)
-
-**Menu**
-![Menu](docs/menu.png)
 
 **Order Ahead**
 ![Order Ahead](docs/order-ahead.png)
@@ -164,8 +172,6 @@ The system simulates a real cafe platform where users can browse menus, place or
 
 ---
 
-## 💡 Inspiration
+## Motivation
 
-Always wanted to open a café someday 
-
----
+Always wanted to open a café someday.
