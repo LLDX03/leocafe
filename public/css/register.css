@@ -563,8 +563,15 @@
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
+      body {
+          align-items: flex-start;
+          overflow-x: hidden;
+          overflow-y: auto;
+      }
+
       .page {
           grid-template-columns: 1fr;
+          min-height: 100vh;
       }
 
       .panel-right {
@@ -572,7 +579,8 @@
       }
 
       .panel-left {
-          padding: 48px 28px;
+          padding: 56px 28px 48px;
+          min-height: 100vh;
       }
 
       .form-card {
