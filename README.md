@@ -127,11 +127,27 @@ This project uses [Neon](https://neon.tech) (serverless PostgreSQL) — no local
 
 2. Create a free database at [neon.tech](https://neon.tech) and run `db/setup.sql` in the Neon SQL Editor to create all tables.
 
-3. Copy `.env.example` to `.env` and fill in your values:
+3. Copy `.env.example` to `.env` and fill in your values.
+
+   **Option A — Neon (recommended, no local install):**
    ```
    JWT_SECRET=your_jwt_secret
 
    DATABASE_URL=your_neon_connection_string
+
+   SENDGRID_API_KEY=your_sendgrid_key
+   SENDGRID_FROM_EMAIL=your_sender_email
+   ```
+
+   **Option B — Local PostgreSQL:**
+   ```
+   JWT_SECRET=your_jwt_secret
+
+   DB_USER=your_database_user
+   DB_HOST=your_database_host
+   DB_NAME=your_database_name
+   DB_PASSWORD=your_database_password
+   DB_PORT=5432
 
    SENDGRID_API_KEY=your_sendgrid_key
    SENDGRID_FROM_EMAIL=your_sender_email
