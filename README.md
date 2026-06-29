@@ -116,6 +116,8 @@ Password: Test12345!
 
 ## Local Setup
 
+This project uses [Neon](https://neon.tech) (serverless PostgreSQL) — no local database installation required.
+
 1. Clone the repo and install dependencies:
    ```bash
    git clone https://github.com/LLDX03/leocafe.git
@@ -123,26 +125,19 @@ Password: Test12345!
    npm install
    ```
 
-2. Copy `.env.example` to `.env` and fill in your values:
+2. Create a free database at [neon.tech](https://neon.tech) and run `db/setup.sql` in the Neon SQL Editor to create all tables.
+
+3. Copy `.env.example` to `.env` and fill in your values:
    ```
    JWT_SECRET=your_jwt_secret
 
-   DB_USER=your_db_user
-   DB_HOST=your_db_host
-   DB_NAME=your_db_name
-   DB_PASSWORD=your_db_password
-   DB_PORT=5432
+   DATABASE_URL=your_neon_connection_string
 
    SENDGRID_API_KEY=your_sendgrid_key
    SENDGRID_FROM_EMAIL=your_sender_email
    ```
 
-3. Create the database tables:
-   ```bash
-   psql -U <user> -d <database> -f db/setup.sql
-   ```
-
-4. Start the server:
+4. Start the backend server:
    ```bash
    npm start
    ```
