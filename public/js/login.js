@@ -78,8 +78,8 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             const remember = document.getElementById("remember").checked;
 
             const expiry = remember
-                ? Date.now() + 24 * 60 * 60 * 1000   // 1 day
-                : Date.now() + 60 * 60 * 1000;       // 1 hour
+                ? Date.now() + 30 * 24 * 60 * 60 * 1000  // 30 days
+                : Date.now() + 60 * 60 * 1000;            // 1 hour
 
             localStorage.setItem("token", data.token);
             localStorage.setItem("token_expiry", expiry);
