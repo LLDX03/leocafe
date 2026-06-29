@@ -230,7 +230,14 @@
   </div>
 
   <!-- CART COLUMN -->
-  <div class="cart-col">
+  <div class="cart-col" id="cartCol">
+    <div class="cart-handle" id="cartHandle">
+      <div class="cart-handle-bar"></div>
+      <div class="cart-handle-summary">
+        <span class="cart-handle-label"><i class="ti ti-shopping-bag"></i> <span id="cartHandleCount">Your Order</span></span>
+        <span class="cart-handle-total" id="cartHandleTotal"></span>
+      </div>
+    </div>
     <div class="cart-title">Your Order</div>
     <div class="cart-sub">Items will be ready at pickup</div>
     <div class="cart-items" id="cartItems">

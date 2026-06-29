@@ -605,6 +605,11 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
+/* Mobile cart handle — hidden on desktop */
+.cart-handle {
+    display: none;
+}
+
 @media(max-width:768px) {
     .layout {
         grid-template-columns: 1fr;
@@ -616,20 +621,91 @@ body {
         left: 0;
         right: 0;
         height: auto;
-        max-height: 60vh;
+        max-height: 72px;
         border-top: 1px solid var(--divider);
         border-radius: 20px 20px 0 0;
         z-index: 50;
         box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0;
+    }
+
+    .cart-col.open {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    /* Show the handle bar on mobile */
+    .cart-handle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 20px 8px;
+        cursor: pointer;
+        flex-shrink: 0;
+        background: var(--white);
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .cart-handle-bar {
+        width: 36px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--sage-pale);
+        margin-bottom: 8px;
+    }
+
+    .cart-handle-summary {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cart-handle-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--charcoal);
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .cart-handle-label i {
+        font-size: 14px;
+        color: var(--sage-deep);
+    }
+
+    .cart-handle-total {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 16px;
+        color: var(--sage-deep);
+        font-weight: 500;
     }
 
     .menu-col {
-        padding: 24px 20px 280px;
+        padding: 20px 16px 100px;
     }
 
     .cart-title,
     .cart-sub {
         display: none;
+    }
+
+    /* Inner cart content padding */
+    .cart-items,
+    #cartSummary,
+    .cart-col > div:not(.cart-handle) {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .cart-col > div:last-child {
+        padding-bottom: 24px;
     }
 
     .top-nav {
@@ -650,10 +726,6 @@ body {
         font-size: 0.7rem;
         padding: 0.3rem 0.7rem;
         white-space: nowrap;
-    }
-
-    .menu-col {
-        padding: 20px 16px 280px;
     }
 
     .slot-grid {

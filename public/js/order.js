@@ -47,8 +47,21 @@ function changeQty(btn, delta) {
         delete cart[cartKey];
     } else {
         cart[cartKey] = { cartKey, name: displayName, price, qty };
+        // Auto-open cart on mobile when first item added
+        if (Object.keys(cart).length === 1 && window.innerWidth <= 768) {
+            document.getElementById('cartCol').classList.add('open');
+        }
     }
     renderCart();
+}
+
+function updateCartHandle(items, total) {
+    const countEl = document.getElementById('cartHandleCount');
+    const totalEl = document.getElementById('cartHandleTotal');
+    if (!countEl) return;
+    const totalQty = items.reduce((s, it) => s + it.qty, 0);
+    countEl.textContent = totalQty > 0 ? `${totalQty} item${totalQty > 1 ? 's' : ''}` : 'Your Order';
+    totalEl.textContent = totalQty > 0 ? '$' + total.toFixed(2) : '';
 }
 
 function renderCart() {
@@ -65,6 +78,7 @@ function renderCart() {
         empty.style.display = 'block';
         summary.style.display = 'none';
         btn.disabled = true;
+        updateCartHandle(items, 0);
         return;
     }
     empty.style.display = 'none';
@@ -82,6 +96,7 @@ function renderCart() {
 
     document.getElementById('cartSubtotal').textContent = '$' + subtotal.toFixed(2);
     document.getElementById('cartTotal').textContent = '$' + subtotal.toFixed(2);
+    updateCartHandle(items, subtotal);
 
     // Earn points estimate (10pts per dollar)
     const earnPts = Math.round(subtotal * 10);
@@ -174,3 +189,8 @@ function showToast(msg) {
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 3000);
 }
+
+// Mobile cart toggle
+document.getElementById('cartHandle').addEventListener('click', () => {
+    document.getElementById('cartCol').classList.toggle('open');
+});
