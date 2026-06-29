@@ -8,8 +8,8 @@ A full-stack cafe management web application built as a personal project to stre
 
 https://leocafe.vercel.app
 
-Demo Account
-Email: Test@gmail.com
+Demo Account  
+Email: Test@gmail.com  
 Password: Test12345!
 
 ---
