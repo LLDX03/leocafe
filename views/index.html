@@ -9,7 +9,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/css/index.css?v=10">
+  <link rel="stylesheet" href="/css/index.css?v=11">
+  <link rel="stylesheet" href="/css/nav.css?v=11">
   <link rel="icon" href="data:,">
 
 </head>
@@ -29,7 +30,7 @@
 
     <!-- Member welcome strip (shown only when logged in) -->
     <div class="member-strip" id="memberStrip" style="display:none;">
-      <div class="strip-left" id="accountTrigger">
+      <div class="strip-left">
         <a class="strip-avatar" id="stripAvatar" href="/profile" title="My Account"></a>
         <div>
           <div class="strip-name" id="stripName">Welcome back, Leo</div>
@@ -41,7 +42,7 @@
           </div>
 
         </div>
-        <i class="ti ti-chevron-down strip-caret" aria-hidden="true"></i>
+        <button class="nav-toggle" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
       </div>
       <div class="strip-right">
         <a class="strip-pill" href="/rewards">
@@ -60,22 +61,12 @@
           <i class="ti ti-receipt"></i> My Orders
         </a>
         <div class="strip-divider"></div>
-
-        <!-- Profile Dropdown -->
-        <div class="profile-dropdown">
-          <button class="strip-pill dropdown-toggle">
-            <span id="toggleName"></span>
-            <i class="ti ti-chevron-down" style="font-size:10px;"></i>
-          </button>
-          <div class="dropdown-menu">
-            <a href="/profile" class="dropdown-item">
-              <i class="ti ti-user-circle"></i> My Account
-            </a>
-            <button onclick="logout()" class="dropdown-item logout-item">
-              <i class="ti ti-logout"></i> Sign Out
-            </button>
-          </div>
-        </div>
+        <a class="strip-pill" href="/profile">
+          <i class="ti ti-user-circle"></i> My Account
+        </a>
+        <button class="strip-pill" onclick="logout()">
+          <i class="ti ti-logout"></i> Sign Out
+        </button>
       </div>
     </div>
 
@@ -328,7 +319,8 @@
     </section>
   </div>
 
-  <script src="/js/index.js?v=10"></script>
+  <script src="/js/nav.js?v=11"></script>
+  <script src="/js/index.js?v=11"></script>
 </body>
 
 </html>

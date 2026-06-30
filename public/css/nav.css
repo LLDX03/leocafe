@@ -1,0 +1,82 @@
+/* Shared mobile nav: collapse the pill row into a hamburger dropdown.
+   Loaded AFTER each page's own CSS so these rules win. Desktop is untouched. */
+
+.nav-toggle { display: none; }
+
+@media (max-width: 768px) {
+    .top-nav,
+    .member-strip { position: relative; }
+
+    /* Hamburger button */
+    .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 10px;
+        color: #d8edd9;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .nav-toggle:hover { background: rgba(255, 255, 255, 0.18); }
+
+    /* The links become a dropdown panel anchored under the bar.
+       Covers both nav structures: .top-nav .nav-links and home's .strip-right */
+    .top-nav .nav-links,
+    .member-strip .strip-right {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 12px;
+        right: 12px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        width: auto;
+        max-height: none;
+        padding: 6px;
+        background: #3D5C42;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 12px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+        overflow: visible;
+        -webkit-mask-image: none;
+        mask-image: none;
+        z-index: 300;
+    }
+
+    .top-nav.open .nav-links,
+    .member-strip.open .strip-right { display: flex; }
+
+    /* Each link becomes a full-width row */
+    .top-nav .nav-links .nav-pill,
+    .member-strip .strip-right .strip-pill {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 12px 14px;
+        font-size: 13px;
+        background: transparent;
+        border: none;
+        border-radius: 8px;
+        white-space: nowrap;
+    }
+
+    .top-nav .nav-links .nav-pill.active,
+    .top-nav .nav-links .nav-pill:hover,
+    .member-strip .strip-right .strip-pill.active,
+    .member-strip .strip-right .strip-pill:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+    }
+
+    .nav-divider,
+    .strip-divider { display: none; }
+}
