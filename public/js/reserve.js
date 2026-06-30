@@ -16,7 +16,7 @@ document.getElementById('resDate').value = today;
 let selectedGuests = 2;
 let selectedSlot = null;
 
-// â”€â”€ Grey out past slots when today is selected â”€â”€
+// Grey out past slots when today is selected
 function updateSlotAvailability() {
   const selectedDate = document.getElementById('resDate').value;
   const isToday = selectedDate === today;
@@ -49,7 +49,7 @@ function updateSlotAvailability() {
         btn.disabled = false;
       }
     } else {
-      // Future date â€” all slots available (except server-taken ones)
+      // Future date - all slots available (except server-taken ones)
       btn.classList.remove('full');
       btn.disabled = false;
     }

@@ -66,7 +66,7 @@ function setStatus(status) {
     iconWrap.classList.remove("ready");
     icon.className = "ti ti-coffee status-icon";
     title.textContent = "We're preparing your order";
-    sub.textContent = "Sit tight — this usually takes just a few minutes.";
+    sub.textContent = "Sit tight \u2014 this usually takes just a few minutes.";
   }
 }
 

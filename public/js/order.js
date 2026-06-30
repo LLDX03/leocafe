@@ -6,7 +6,7 @@ function switchTab(btn, id) {
     document.getElementById('sec-' + id).classList.add('visible');
 }
 
-// Milk selection per item — switch counter to show that variant's qty
+// Milk selection per item - switch counter to show that variant's qty
 function selectMilk(btn) {
     const row = btn.closest('.milk-row');
     const item = btn.closest('.order-item');
@@ -104,7 +104,7 @@ function renderCart() {
         const now = new Date();
         [10, 20, 30, 45].forEach((mins, i) => {
             const t = new Date(now.getTime() + mins * 60000);
-            const label = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + (mins === 10 ? ' · Soonest' : '');
+            const label = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + (mins === 10 ? ' \u00B7 Soonest' : '');
             const btn2 = document.createElement('button');
             btn2.className = 'time-opt' + (i === 0 ? ' active' : '');
             btn2.textContent = label;
@@ -139,7 +139,7 @@ async function placeOrder() {
     const subtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
     const earnPts = Math.round(subtotal * 10);
     const timeBtn = document.querySelector('.time-opt.active');
-    const pickupTime = timeBtn ? timeBtn.textContent.split('·')[0].trim() : 'soon';
+    const pickupTime = timeBtn ? timeBtn.textContent.split('\u00B7')[0].trim() : 'soon';
 
     const btn = document.getElementById('btnPlace');
     btn.disabled = true;

@@ -56,7 +56,7 @@ function renderQRCard(code) {
     <div class="qr-card-header">
       <div>
         <div class="qr-reward-name">${code.reward_name}</div>
-        <div class="qr-meta">${code.points_deducted} pts · Expires in ${timeLeft}</div>
+        <div class="qr-meta">${code.points_deducted} pts \u00B7 Expires in ${timeLeft}</div>
       </div>
       <div class="qr-ref">${code.redemption_id}</div>
     </div>

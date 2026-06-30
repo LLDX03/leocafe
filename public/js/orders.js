@@ -38,7 +38,7 @@ async function loadOrders() {
         </div>
         <div class="order-meta">
           <span><i class="ti ti-calendar"></i> ${date}</span>
-          <span><i class="ti ti-clock"></i> ${order.pickup_time || "—"}</span>
+          <span><i class="ti ti-clock"></i> ${order.pickup_time || "\u2014"}</span>
         </div>
         <div class="order-items">${itemSummary}</div>
         <div class="card-bottom">

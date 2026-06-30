@@ -71,7 +71,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
         const data = await res.json();
 
-        // âŒ ALWAYS HIDE FIRST
+        // ALWAYS HIDE FIRST
         document.getElementById("successMsg").style.display = "none";
 
         if (data.success) {
