@@ -4,7 +4,13 @@
 .nav-toggle { display: none; }
 
 @media (max-width: 768px) {
-    .top-nav,
+    /* sticky so the hamburger stays reachable while scrolling; also acts as the
+       positioning context for the absolute dropdown below */
+    .top-nav {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+    }
     .member-strip { position: relative; }
 
     /* Hamburger button */
