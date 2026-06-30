@@ -387,6 +387,13 @@ html, body {
         padding: 10px 16px;
     }
 
+    /* In the stacked layout the pill row must fill the width and scroll
+       internally — flex:1/min-width:0 only constrain the (now vertical) main axis */
+    .strip-right {
+        width: 100%;
+        align-self: stretch;
+    }
+
     .header {
         padding: 32px 16px 24px;
     }

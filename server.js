@@ -9,7 +9,18 @@ const app = express();
 app.use(compression());
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public"), { maxAge: "7d" }));
+app.use(express.static(path.join(__dirname, "public"), {
+  setHeaders: (res, filePath) => {
+    // CSS/JS revalidate every load (cheap 304 if unchanged) so style/script
+    // updates always reach the browser without manual cache-busting.
+    // Other assets (fonts, images) can cache for a week.
+    if (filePath.endsWith(".css") || filePath.endsWith(".js")) {
+      res.setHeader("Cache-Control", "no-cache");
+    } else {
+      res.setHeader("Cache-Control", "public, max-age=604800");
+    }
+  }
+}));
 
 // Page routes
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "views", "login.html")));

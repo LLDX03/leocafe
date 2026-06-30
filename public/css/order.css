@@ -613,7 +613,24 @@ body {
 
 @media(max-width:768px) {
     .layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Category tabs scroll horizontally instead of forcing the page wider */
+    .cat-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+        mask-image: linear-gradient(to right, black 88%, transparent 100%);
+    }
+
+    .cat-tabs::-webkit-scrollbar { display: none; }
+
+    .cat-tab {
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     /* Backdrop overlay behind the open cart */
@@ -635,6 +652,7 @@ body {
     /* Cart sheet */
     .cart-col {
         position: fixed;
+        top: auto;
         bottom: 0;
         left: 0;
         right: 0;
