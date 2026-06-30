@@ -402,6 +402,35 @@ html, body {
         align-self: stretch;
     }
 
+    /* The welcome bar becomes the account dropdown trigger (the off-screen
+       pill in the scroll row isn't reachable on mobile). Make it clearly
+       tappable with a chevron. */
+    .strip-left {
+        width: 100%;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 12px;
+        padding: 8px 12px;
+    }
+
+    .strip-left .strip-caret {
+        display: inline-block;
+        margin-left: auto;
+        color: #C8DBCB;
+        font-size: 16px;
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+    }
+
+    .strip-left.open .strip-caret {
+        transform: rotate(180deg);
+    }
+
+    /* Hide the off-screen pill button (keep .profile-dropdown so its menu,
+       which JS positions fixed, stays usable) */
+    .dropdown-toggle { display: none; }
+
     .header {
         padding: 32px 16px 24px;
     }
@@ -430,6 +459,11 @@ html, body {
 .profile-dropdown {
     position: relative;
     display: inline-block;
+}
+
+/* Chevron on the welcome bar — only used as the mobile dropdown trigger */
+.strip-caret {
+    display: none;
 }
 
 .dropdown-toggle {

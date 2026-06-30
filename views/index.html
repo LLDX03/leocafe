@@ -9,7 +9,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/css/index.css?v=8">
+  <link rel="stylesheet" href="/css/index.css?v=9">
   <link rel="icon" href="data:,">
 
 </head>
@@ -29,7 +29,7 @@
 
     <!-- Member welcome strip (shown only when logged in) -->
     <div class="member-strip" id="memberStrip" style="display:none;">
-      <div class="strip-left">
+      <div class="strip-left" id="accountTrigger">
         <a class="strip-avatar" id="stripAvatar" href="/profile" title="My Account"></a>
         <div>
           <div class="strip-name" id="stripName">Welcome back, Leo</div>
@@ -41,6 +41,7 @@
           </div>
 
         </div>
+        <i class="ti ti-chevron-down strip-caret" aria-hidden="true"></i>
       </div>
       <div class="strip-right">
         <a class="strip-pill" href="/rewards">
@@ -327,7 +328,7 @@
     </section>
   </div>
 
-  <script src="/js/index.js?v=8"></script>
+  <script src="/js/index.js?v=9"></script>
 </body>
 
 </html>

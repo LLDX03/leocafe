@@ -73,46 +73,53 @@ function logout() {
 const __profileDropdown = document.querySelector('.profile-dropdown');
 const __dropdownToggle = document.querySelector('.dropdown-toggle');
 const __dropdownMenu = document.querySelector('.dropdown-menu');
-const __avatar = document.getElementById('stripAvatar');
+const __accountTrigger = document.getElementById('accountTrigger'); // welcome bar (mobile)
 const __isTouch = () => window.matchMedia('(max-width: 600px), (hover: none)').matches;
 
-function __openMenuUnder(el) {
+function __openMenuUnder(el, matchWidth) {
   const r = el.getBoundingClientRect();
-  // fixed coords = viewport coords; clamp so the 160px menu stays on-screen
-  const left = Math.min(r.left, window.innerWidth - 160 - 12);
   __dropdownMenu.style.position = 'fixed';
   __dropdownMenu.style.top = (r.bottom + 8) + 'px';
-  __dropdownMenu.style.left = Math.max(12, left) + 'px';
+  if (matchWidth) {
+    // drop the menu directly under the bar, same width
+    __dropdownMenu.style.left = r.left + 'px';
+    __dropdownMenu.style.width = r.width + 'px';
+  } else {
+    const left = Math.min(r.left, window.innerWidth - 160 - 12);
+    __dropdownMenu.style.left = Math.max(12, left) + 'px';
+  }
   __dropdownMenu.style.right = 'auto';
   __profileDropdown.classList.add('open');
+  if (__accountTrigger) __accountTrigger.classList.add('open');
 }
 function __closeMenu() {
   __profileDropdown.classList.remove('open');
+  if (__accountTrigger) __accountTrigger.classList.remove('open');
   __dropdownMenu.style.position = '';
   __dropdownMenu.style.top = '';
   __dropdownMenu.style.left = '';
   __dropdownMenu.style.right = '';
+  __dropdownMenu.style.width = '';
 }
 
 if (__profileDropdown && __dropdownMenu) {
-  // Avatar: trigger on touch/narrow, plain link to /profile otherwise
-  if (__avatar) {
-    __avatar.addEventListener('click', (e) => {
-      if (!__isTouch()) return; // desktop: let the link navigate
+  // Mobile/touch: the welcome bar is the visible dropdown trigger
+  if (__accountTrigger) {
+    __accountTrigger.addEventListener('click', (e) => {
+      if (!__isTouch()) return; // desktop: avatar inside stays a link to /profile
       e.preventDefault();
-      __profileDropdown.classList.contains('open') ? __closeMenu() : __openMenuUnder(__avatar);
+      __profileDropdown.classList.contains('open') ? __closeMenu() : __openMenuUnder(__accountTrigger, true);
     });
   }
   // Desktop pill toggle (hover also works via CSS)
   if (__dropdownToggle) {
     __dropdownToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (__isTouch()) { __openMenuUnder(__dropdownToggle); return; }
       __profileDropdown.classList.contains('open') ? __closeMenu() : __profileDropdown.classList.add('open');
     });
   }
   // Click outside closes
   document.addEventListener('click', (e) => {
-    if (!__profileDropdown.contains(e.target) && e.target !== __avatar) __closeMenu();
+    if (!__profileDropdown.contains(e.target) && (!__accountTrigger || !__accountTrigger.contains(e.target))) __closeMenu();
   });
 }
