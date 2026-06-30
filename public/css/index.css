@@ -302,6 +302,14 @@ html, body {
     font-weight: 500;
     color: #C8DBCB;
     flex-shrink: 0;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.strip-avatar:hover {
+    background: rgba(200, 219, 203, 0.4);
+    border-color: rgba(200, 219, 203, 0.6);
 }
 
 .strip-name {
@@ -463,7 +471,8 @@ html, body {
     overflow: hidden;
 }
 
-.profile-dropdown:hover .dropdown-menu {
+.profile-dropdown:hover .dropdown-menu,
+.profile-dropdown.open .dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

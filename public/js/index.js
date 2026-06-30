@@ -63,3 +63,23 @@ function logout() {
     window.location.href = '/login';
   }
 }
+
+/* Profile dropdown — :hover handles desktop mouse, but touch devices have no
+   hover. On narrow/touch screens the menu also lives inside a horizontally
+   scrolling, overflow-clipped row, so tapping just navigates straight to the
+   account page (Sign Out lives there too). On desktop, tap toggles the menu. */
+const __profileDropdown = document.querySelector('.profile-dropdown');
+const __dropdownToggle = document.querySelector('.dropdown-toggle');
+if (__dropdownToggle && __profileDropdown) {
+  __dropdownToggle.addEventListener('click', (e) => {
+    if (window.matchMedia('(max-width: 600px), (hover: none)').matches) {
+      window.location.href = '/profile';
+      return;
+    }
+    e.stopPropagation();
+    __profileDropdown.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!__profileDropdown.contains(e.target)) __profileDropdown.classList.remove('open');
+  });
+}
