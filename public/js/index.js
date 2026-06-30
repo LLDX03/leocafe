@@ -64,22 +64,55 @@ function logout() {
   }
 }
 
-/* Profile dropdown — :hover handles desktop mouse, but touch devices have no
-   hover. On narrow/touch screens the menu also lives inside a horizontally
-   scrolling, overflow-clipped row, so tapping just navigates straight to the
-   account page (Sign Out lives there too). On desktop, tap toggles the menu. */
+/* Profile dropdown.
+   Desktop: the named pill in the strip opens the menu on hover or click.
+   Mobile/touch: that pill lives in a horizontally-scrolling, overflow-clipped
+   row and ends up off-screen, so the always-visible avatar (top-left) becomes
+   the trigger instead. The menu is rendered position:fixed (anchored under the
+   avatar) so it escapes the row's overflow clipping. */
 const __profileDropdown = document.querySelector('.profile-dropdown');
 const __dropdownToggle = document.querySelector('.dropdown-toggle');
-if (__dropdownToggle && __profileDropdown) {
-  __dropdownToggle.addEventListener('click', (e) => {
-    if (window.matchMedia('(max-width: 600px), (hover: none)').matches) {
-      window.location.href = '/profile';
-      return;
-    }
-    e.stopPropagation();
-    __profileDropdown.classList.toggle('open');
-  });
+const __dropdownMenu = document.querySelector('.dropdown-menu');
+const __avatar = document.getElementById('stripAvatar');
+const __isTouch = () => window.matchMedia('(max-width: 600px), (hover: none)').matches;
+
+function __openMenuUnder(el) {
+  const r = el.getBoundingClientRect();
+  // fixed coords = viewport coords; clamp so the 160px menu stays on-screen
+  const left = Math.min(r.left, window.innerWidth - 160 - 12);
+  __dropdownMenu.style.position = 'fixed';
+  __dropdownMenu.style.top = (r.bottom + 8) + 'px';
+  __dropdownMenu.style.left = Math.max(12, left) + 'px';
+  __dropdownMenu.style.right = 'auto';
+  __profileDropdown.classList.add('open');
+}
+function __closeMenu() {
+  __profileDropdown.classList.remove('open');
+  __dropdownMenu.style.position = '';
+  __dropdownMenu.style.top = '';
+  __dropdownMenu.style.left = '';
+  __dropdownMenu.style.right = '';
+}
+
+if (__profileDropdown && __dropdownMenu) {
+  // Avatar: trigger on touch/narrow, plain link to /profile otherwise
+  if (__avatar) {
+    __avatar.addEventListener('click', (e) => {
+      if (!__isTouch()) return; // desktop: let the link navigate
+      e.preventDefault();
+      __profileDropdown.classList.contains('open') ? __closeMenu() : __openMenuUnder(__avatar);
+    });
+  }
+  // Desktop pill toggle (hover also works via CSS)
+  if (__dropdownToggle) {
+    __dropdownToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (__isTouch()) { __openMenuUnder(__dropdownToggle); return; }
+      __profileDropdown.classList.contains('open') ? __closeMenu() : __profileDropdown.classList.add('open');
+    });
+  }
+  // Click outside closes
   document.addEventListener('click', (e) => {
-    if (!__profileDropdown.contains(e.target)) __profileDropdown.classList.remove('open');
+    if (!__profileDropdown.contains(e.target) && e.target !== __avatar) __closeMenu();
   });
 }
